@@ -73,7 +73,8 @@
     "watch-sass": "node-sass --source-map true -w css/main.scss build/bundle.css",
     "build-js": "browserify . -d > build/bundle.js",
     "watch": "parallelshell \"npm run watch-sass\" \"npm run watch-sass\"",
-    "deploy": "nodemon server.js"
+    "deploy": "nodemon server.js",
+    "deploy-files": "node fileserver.js"
   },
   "author": "Ethan Deng",
   "browserify": {
