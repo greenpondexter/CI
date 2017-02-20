@@ -7,7 +7,7 @@ var IgnorePlugin = require("webpack").IgnorePlugin;
 
 module.exports = {
   devtool : 'eval',
-  entry   : [path.resolve(__dirname, 'js', 'Entry.jsx')],
+  entry   : [path.resolve(__dirname, 'js', 'Entry.tsx')],
   output: {
     path       : path.join(__dirname, 'build'),
     filename   : 'bundle.js'
@@ -27,10 +27,15 @@ module.exports = {
     
     // ],
     
-    loaders: [{
+    loaders: [
+      {
       test     : /\.jsx$/,
       loaders  : ['babel?presets[]=react,presets[]=es2015'],
       exclude  : [path.join(__dirname, 'node_modules')]
+    },
+    {
+      test: /\.tsx?$/, 
+      loaders: ["react-hot-loader","awesome-typescript-loader"] 
     },
     {
       test     : /\.scss$/,
@@ -65,7 +70,7 @@ module.exports = {
   //   devel     : true // able to use 'console' and 'alert'
   // },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
     alias: {
       root : path.join(__dirname, 'node_modules'),
       js   : path.resolve(__dirname, 'client', 'js')
