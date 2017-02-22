@@ -1,5 +1,6 @@
 import {Record, Map} from 'immutable';
-import {SWITCH_PAGE, switchPage, Action} from '../actions/sessionActions';
+import {SWITCH_PAGE, Action} from '../actions/actionsInterface'
+import {switchPage} from '../actions/sessionActions';
 
 
 const initState = Record({

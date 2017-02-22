@@ -1,7 +1,7 @@
 import {Record} from 'immutable'
 import {connect} from 'react-redux'
 import {switchPage} from '../actions/sessionActions'
-import App from '../../js/components/App'
+import App from '../components/App'
 
 export interface StateProps {
     page: string
