@@ -11,11 +11,12 @@ import {Provider} from 'react-redux';
 import store from '../../js/Entry';
 //import {PopulationAnalayzerPageProps} from '../containers/PopulationAnalyzerContainer'
 import {AppPageProps} from '../containers/SessionContainer';
+import {PopulationAnalyzerPageProps} from '../containers/PopulationAnalyzerContainer';
 
-export default class App extends React.Component<AppPageProps ,any>{
-  contructor(props: AppPageProps){
-    //super(props)
-  }
+export default class App extends React.Component<AppPageProps, any>{
+  // constructor(props: AppPageProps){
+  //   super(props);
+  // }
 
   render() {
     
@@ -47,6 +48,7 @@ export default class App extends React.Component<AppPageProps ,any>{
   }
 
    componentDidMount(){
+      this.props.onPopulationAnalyzerLoad();
       //MemberActions.loadMemberData();
       //this.props.onPopulationAnalyzerLoad()
   }

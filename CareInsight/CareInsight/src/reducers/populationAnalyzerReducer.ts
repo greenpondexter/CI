@@ -1,5 +1,5 @@
 import {Record, Map} from 'immutable';
-import {SWITCH_PAGE, Action} from '../actions/actionsInterface';
+import {SWITCH_PAGE, LOAD_POP_ANALYZER, Action} from '../actions/actionsInterface';
 import {switchPage} from '../actions/sessionActions';
 
 
@@ -14,10 +14,10 @@ const initState = Record({
 
 })
 
-export function populationAnalyzerReducer( state = initState, action: Action<SWITCH_PAGE>){
+export function populationAnalyzerReducer( state = initState, action: Action<LOAD_POP_ANALYZER>){
     switch(action.type){
         case 'SWITCH_PAGE':
-            return Record({'page' : action.payload.page})
+            return Record({'a' : action.payload.a})
         default:
             return state; 
     }

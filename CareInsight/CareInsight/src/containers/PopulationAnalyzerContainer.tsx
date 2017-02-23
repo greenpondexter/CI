@@ -14,7 +14,7 @@ export interface PopulationAnalyzerDispatchProps {
     onPopulationAnalyzerLoad(): void;
 }
 
-export type PopulationAnalayzerPageProps = PopulationAnalyzerProps & PopulationAnalyzerDispatchProps;
+export type PopulationAnalyzerPageProps = PopulationAnalyzerProps & PopulationAnalyzerDispatchProps;
 
 const mapStateToProps = (state: any): any => {
     return {
@@ -28,14 +28,14 @@ const mapStateToProps = (state: any): any => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        onPageUpdate: (text:string) => {
-            dispatch(switchPage(text))
+        onPopulationAnalyzerLoad: () => {
+            dispatch(loadPopAnalyzer())
         }
     }
 }
 
 
-export const SessionContainer = connect(
+export const PopulationAnalyzerContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(PopulationAnalyzer as any)

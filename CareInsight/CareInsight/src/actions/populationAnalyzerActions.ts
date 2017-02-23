@@ -4,8 +4,7 @@ export function loadPopAnalyzer(): Action<LOAD_POP_ANALYZER>{
     return {
         type: 'LOAD_POP_ANALYZER',
         payload: {
-            id  : 1,
-            page 
+            a : 1
         } 
     }
 }

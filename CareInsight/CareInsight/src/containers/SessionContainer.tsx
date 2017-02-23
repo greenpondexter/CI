@@ -1,6 +1,6 @@
 import {Record} from 'immutable'
 import {connect} from 'react-redux'
-import {switchPage} from '../actions/sessionActions'
+import {loadPopAnalyzer} from '../actions/populationAnalyzerActions'
 import App from '../components/App'
 
 export interface StateProps {
@@ -8,27 +8,27 @@ export interface StateProps {
 }
 
 export interface DispatchProps {
-    onPageUpdate(page: string): void;
+    onPopulationAnalyzerLoad(): void;
+
 }
 
 export type AppPageProps = StateProps & DispatchProps;
 
 const mapStateToProps = (state: any): any => {
     return {
-        page: (function(s){return s.onPageUpdate().get('page')})(state)
+        page: (function(s){
+            return s.populationAnalyzerReducer().get('a')
+        })(state)
     }
 }
-
-
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        onPageUpdate: (text:string) => {
-            dispatch(switchPage(text))
+        onPopulationAnalyzerLoad: () => {
+            dispatch(loadPopAnalyzer())
         }
     }
 }
-
 
 export const SessionContainer = connect(
     mapStateToProps,

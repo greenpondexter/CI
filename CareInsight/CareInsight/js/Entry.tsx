@@ -7,17 +7,18 @@ import {Provider} from 'react-redux'
 import {SessionContainer} from '../src/containers/SessionContainer'
 import createSagaMiddleware from 'redux-saga'
 import {applyMiddleware} from 'redux';
+import {rootSaga, loadPopAnalyzerSaga} from '../src/sagas/memberProfileSaga'
 
-
-//const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
-  compositeReducer
-  //applyMiddleware(sagaMiddleware)
+  compositeReducer,
+  applyMiddleware(sagaMiddleware)
   );
 
-//sagaMiddleware.run(null);
+sagaMiddleware.run(rootSaga);
 
-const A = App as any 
+
+const A = SessionContainer as any 
 render(
   <Provider store={store}>
     <A/>
