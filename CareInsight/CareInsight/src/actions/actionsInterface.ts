@@ -6,12 +6,15 @@ export interface Action<T>{
 
 export type SWITCH_PAGE = {id: number, page: string} 
 export type LOAD_POP_ANALYZER = {
-    // fullSet: Array<any>,
-    // crossfilterSet: any, 
-    // membersSelected : any, 
+     fullSet: Array<any>,
+     crossFilterSet: any, 
+     membersSelected : any
     // erDimension: any,
     // prosDimension: any,
     // admitsDimension: any,
     // edCasesDimension: any 
-    a : any 
+    //a : any 
+}
+export type TRIGGER_POP_ANALYZER_LOAD = {
+    count: number 
 }

@@ -1,5 +1,5 @@
 import {Record, Map} from 'immutable';
-import {SWITCH_PAGE, LOAD_POP_ANALYZER, Action} from '../actions/actionsInterface';
+import {LOAD_POP_ANALYZER, Action} from '../actions/actionsInterface';
 import {switchPage} from '../actions/sessionActions';
 
 
@@ -16,8 +16,11 @@ const initState = Record({
 
 export function populationAnalyzerReducer( state = initState, action: Action<LOAD_POP_ANALYZER>){
     switch(action.type){
-        case 'SWITCH_PAGE':
-            return Record({'a' : action.payload.a})
+        case 'LOAD_POP_ANALYZER':
+            return Record({'fullSet' : action.payload.fullSet,
+                           'crossFilterSet' : action.payload.crossFilterSet,
+                           'membersSelected' : action.payload.membersSelected   
+                         })
         default:
             return state; 
     }

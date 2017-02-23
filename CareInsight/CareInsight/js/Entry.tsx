@@ -7,7 +7,7 @@ import {Provider} from 'react-redux'
 import {SessionContainer} from '../src/containers/SessionContainer'
 import createSagaMiddleware from 'redux-saga'
 import {applyMiddleware} from 'redux';
-import {rootSaga, loadPopAnalyzerSaga} from '../src/sagas/memberProfileSaga'
+import {rootSaga} from '../src/sagas/memberProfileSaga'
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(

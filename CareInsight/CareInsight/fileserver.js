@@ -48,6 +48,17 @@ http.createServer(function (req, res) {
       } else {
         // if the file is found, set Content-type and send data
         res.setHeader('Content-type', map[ext] || 'text/plain' );
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:7777');
+
+        // Request methods you wish to allow
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+        // Request headers you wish to allow
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+        // Set to true if you need the website to include cookies in the requests sent
+        // to the API (e.g. in case you use sessions)
+        res.setHeader('Access-Control-Allow-Credentials', true);
         res.end(data);
       }
     });

@@ -1,6 +1,6 @@
 import {Record} from 'immutable'
 import {connect} from 'react-redux'
-import {loadPopAnalyzer} from '../actions/populationAnalyzerActions'
+import {triggerPopAnalyzer} from '../actions/populationAnalyzerActions'
 import App from '../components/App'
 
 export interface StateProps {
@@ -17,7 +17,7 @@ export type AppPageProps = StateProps & DispatchProps;
 const mapStateToProps = (state: any): any => {
     return {
         page: (function(s){
-            return s.populationAnalyzerReducer().get('a')
+            return s.switchPageReducer().get('page')
         })(state)
     }
 }
@@ -25,7 +25,7 @@ const mapStateToProps = (state: any): any => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         onPopulationAnalyzerLoad: () => {
-            dispatch(loadPopAnalyzer())
+            dispatch(triggerPopAnalyzer())
         }
     }
 }
