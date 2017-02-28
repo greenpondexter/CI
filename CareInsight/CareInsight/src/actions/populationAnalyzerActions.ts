@@ -6,7 +6,8 @@ export function loadPopAnalyzer(data:LOAD_POP_ANALYZER): Action<LOAD_POP_ANALYZE
         payload: {
             fullSet : data.fullSet, 
             crossFilterSet : data.crossFilterSet, 
-            membersSelected : data.membersSelected 
+            membersSelected : data.membersSelected,
+            prosDimension : data.prosDimension
         } 
     }
 }

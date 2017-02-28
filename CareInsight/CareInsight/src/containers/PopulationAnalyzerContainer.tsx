@@ -2,7 +2,7 @@ import {Record} from 'immutable'
 import {connect} from 'react-redux'
 import {switchPage} from '../actions/sessionActions'
 import {triggerPopAnalyzer} from '../actions/populationAnalyzerActions'
-import PopulationAnalyzer from '../../js/components/PopulationAnalyzer'
+import PopulationAnalyzer from '../components/PopulationAnalyzer'
 
 export interface PopulationAnalyzerProps {
     page: string,

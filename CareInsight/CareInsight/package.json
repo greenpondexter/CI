@@ -26,7 +26,9 @@
     "spinkit": "^1.2.1"
   },
   "devDependencies": {
+    "@types/d3": "^3.5.37",
     "@types/react": "^15.0.11",
+    "@types/react-bootstrap": "0.0.45",
     "@types/react-dom": "^0.14.23",
     "@types/react-redux": "^4.4.36",
     "@types/redux": "^3.6.0",

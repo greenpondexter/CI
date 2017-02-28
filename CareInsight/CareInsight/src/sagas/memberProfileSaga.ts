@@ -12,7 +12,8 @@ function* loadPopAnalyzerSaga() {
   const finalOutput : LOAD_POP_ANALYZER = {
     fullSet : initDataset,
     crossFilterSet : proccessedMembers.crossfilterSet,
-    membersSelected : proccessedMembers.membersSelected
+    membersSelected : proccessedMembers.membersSelected,
+    prosDimension : proccessedMembers.prosDimension
   } 
   yield put({ type: 'LOAD_POP_ANALYZER', payload: finalOutput})
 }
@@ -71,6 +72,7 @@ interface IfullSet {
 interface ProcessMemberSet {
   crossfilterSet : any;
   membersSelected : any;
+  prosDimension : any; 
 }
 
 function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
@@ -93,7 +95,7 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
       //create the crossfilter object 
       let _crossfilterSet = crossfilter(result);
       // dimension for scatter plot chart
-      let prosDimension = _crossfilterSet.dimension(function(d){ return [+d.prev_pros_risk_score, +d.cur_pros_risk_score]});
+      let _prosDimension = _crossfilterSet.dimension(function(d){ return [+d.prev_pros_risk_score, +d.cur_pros_risk_score]});
       // dimension for er bar chart
       let erDimension = _crossfilterSet.dimension(function(d){ return d.cur_pro_op});
       // dimension for ip bar chart
@@ -107,7 +109,8 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
 
       return {
         crossfilterSet : _crossfilterSet,
-        membersSelected : _membersSelected
+        membersSelected : _membersSelected,
+        prosDimension : _prosDimension
       }
 
       //generateMemberTable();

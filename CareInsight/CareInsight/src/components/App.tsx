@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MemberProfile from '../../js/components/MemberProfile';
-import PopulationAnalyzer from '../../js/components/PopulationAnalyzer';
+import PopulationAnalyzer from '../components/PopulationAnalyzer';
 //import SessionStore from '../../js/stores/SessionStore';
 //import MemberDataStore from '../../js/stores/MemberDataStore';
 //import ProfileDataStore from '../../js/stores/ProfileDataStore';
