@@ -19,7 +19,8 @@ export function populationAnalyzerReducer( state = initState, action: Action<LOA
         case 'LOAD_POP_ANALYZER':
             return Record({'fullSet' : action.payload.fullSet,
                            'crossFilterSet' : action.payload.crossFilterSet,
-                           'membersSelected' : action.payload.membersSelected   
+                           'membersSelected' : action.payload.membersSelected,
+                           'prosDimension'  : action.payload.prosDimension 
                          })
         default:
             return state; 

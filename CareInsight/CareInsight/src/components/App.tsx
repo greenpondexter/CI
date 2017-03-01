@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MemberProfile from '../../js/components/MemberProfile';
-import PopulationAnalyzer from '../components/PopulationAnalyzer';
+import {PopulationAnalyzerContainer} from '../containers/PopulationAnalyzerContainer';
 //import SessionStore from '../../js/stores/SessionStore';
 //import MemberDataStore from '../../js/stores/MemberDataStore';
 //import ProfileDataStore from '../../js/stores/ProfileDataStore';
@@ -20,7 +20,7 @@ export default class App extends React.Component<AppPageProps, any>{
 
   render() {
     
-    let PA = PopulationAnalyzer as any; 
+    let PA = PopulationAnalyzerContainer as any; 
     let pageToRender = this.props.page === "POPULATION_ANALYZER" ?
                         //  <AltContainer stores = {[SessionStore, MemberDataStore]}
                         //                 inject = {{page : () => SessionStore.getState().info.get('page'), 
@@ -28,9 +28,9 @@ export default class App extends React.Component<AppPageProps, any>{
                         //                            counter : () => MemberDataStore.getState().counter.get(0)
                         //                          }}
                         //   >
-                        <Provider store={store}>
+                        //<Provider store={store}>
                             <PA/> 
-                        </Provider>
+                        //</Provider>
                         : null ;// <AltContainer stores = {[SessionStore, ProfileDataStore]}
                         //                 inject = {{page : () => SessionStore.getState().info.get('page'),
                         //                            members : () => ProfileDataStore.getState().memberData,

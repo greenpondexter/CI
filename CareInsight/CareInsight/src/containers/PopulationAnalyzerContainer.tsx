@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {switchPage} from '../actions/sessionActions'
 import {triggerPopAnalyzer} from '../actions/populationAnalyzerActions'
 import PopulationAnalyzer from '../components/PopulationAnalyzer'
+import {populationAnalyzerReducer} from '../reducers/populationAnalyzerReducer'
 
 export interface PopulationAnalyzerProps {
     page: string,
@@ -18,9 +19,9 @@ export type PopulationAnalyzerPageProps = PopulationAnalyzerProps & PopulationAn
 
 const mapStateToProps = (state: any): any => {
     return {
-        page: (function(s){return s.onPopulationAnalyzerLoad().get('page')})(state),
-        fullSet: (function(s){return s.onPopulationAnalyzerLoad().get('fullSet')})(state),
-        counter: (function(s){return s.onPopulationAnalyzerLoad().get('counter')})(state)
+        page: (function(s){return s.populationAnalyzerReducer().get('page')})(state),
+        fullSet: (function(s){return s.populationAnalyzerReducer().get('fullSet')})(state),
+        counter: (function(s){return s.populationAnalyzerReducer().get('counter')})(state)
     }
 }
 

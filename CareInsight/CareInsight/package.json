@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/d3": "^3.5.37",
+    "@types/dc": "0.0.22",
     "@types/react": "^15.0.11",
     "@types/react-bootstrap": "0.0.45",
     "@types/react-dom": "^0.14.23",

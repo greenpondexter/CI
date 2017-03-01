@@ -10,11 +10,13 @@ import {TargetedPopAreaPageProps} from '../containers/TargetedPopAreaContainer'
 // import EdCasesBarChart from './EdCasesBarChart.jsx'
 // import ProsScatterPlotChart from './ProsScatterPlotChart.jsx';
 // import MaraConditionHeatMap from './MaraConditionHeatMap';
-// import TargetedPopArea from './TargetedPopArea.jsx';
 // import TargetedPopTable from './TargetedPopTable.jsx'
 // import MemberTable from './MemberTable.jsx';
 // import ChartNav from './ChartNav.jsx';
- import NavBar from './NavBar';
+import {Provider} from 'react-redux'
+import NavBar from './NavBar';
+import {TargetedPopAreaContainer} from '../containers/TargetedPopAreaContainer'
+import store from '../../js/Entry'
 // import AltContainer from 'alt-container';
 import {Panel, Row, Col} from 'react-bootstrap';
 
@@ -32,28 +34,15 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
       return (<div></div>)
     }
 
-    let J = NavBar as any
     return (
         <div>
           <div className='col-lg-12'>
             <NavBar />
           </div>
-          {/*<Row>
-            <Col md={2}></Col>
-            <Col md={8}>
-              <AltContainer stores = {[MemberDataStore]} 
-                                      inject = {{
-                                        dimension : () => MemberDataStore.getState().prosDimension,
-                                        crossfilterSet : () => MemberDataStore.getState().crossfilterSet,
-                                        dimensionId: () => "cur_pros_risk_score",
-                                        dimensionTitle: () => "Prospective Risk"
-                                      }}>
-                <TargetedPopArea />
-              </AltContainer>
-            </Col>
-            <Col md={2}></Col>
+          <Row>
+                <TargetedPopAreaContainer/>
           </Row>
-          <div className='col-lg-12 allCharts'>
+          {/*<div className='col-lg-12 allCharts'>
            <Row>
             <Col md={1}></Col>
                 <Col md={10}>

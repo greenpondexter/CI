@@ -1,10 +1,16 @@
+import * as React from 'react'
+import * as dc from 'dc'
+import * as d3 from 'd3'
 import {Record} from 'immutable'
 import {connect} from 'react-redux'
-import TargetedPopArea from '../../js/components/TargetedPopArea'
+import {Provider} from 'react-redux'
+import {Panel, Row, Col} from 'react-bootstrap';
+import TargetedPopArea from '../components/TargetedPopArea'
 
-export interface TargetedPopAreaProps {
+ interface TargetedPopAreaProps {
     fullSet: any,
-    prosDimension: any
+    prosDimension: any,
+    crossFilterSet: any
 }
 
 export interface TargetedPopAreaDispatchProps {
@@ -15,19 +21,21 @@ export type TargetedPopAreaPageProps = TargetedPopAreaProps & TargetedPopAreaDis
 
 const mapStateToProps = (state: any): any => {
     return {
-        fullSet: (function(s){return s.onPopulationAnalyzerLoad().get('fullSet')})(state),
-        prosDimension: (function(s){return s.onPopulationAnalyzerLoad().get('prosDimension')})(state)
+        fullSet: (function(s){return s.populationAnalyzerReducer().get('fullSet')})(state),
+        prosDimension: (function(s){return s.populationAnalyzerReducer().get('prosDimension')})(state),
+        crossFilterSet: (function(s){return s.populationAnalyzerReducer().get('crossFilterSet')})(state)
     }
 }
 
-
-
 const mapDispatchToProps = (dispatch: any) => {
-    return {
-            }
+    return {}
 }
+
+
+
+
 
 export const TargetedPopAreaContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(TargetedPopArea as any)
+)(TargetedPopArea)
