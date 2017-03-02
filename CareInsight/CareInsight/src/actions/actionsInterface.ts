@@ -18,3 +18,17 @@ export type LOAD_POP_ANALYZER = {
 export type TRIGGER_POP_ANALYZER_LOAD = {
     count: number 
 }
+
+export type TRIGGER_BRUSH_UPDATE = {
+    count: number 
+}
+export type BRUSH_UPDATE = {
+     fullSet: Array<any>,
+     crossFilterSet: any, 
+     membersSelected : any,
+    // erDimension: any,
+     prosDimension: any
+    // admitsDimension: any,
+    // edCasesDimension: any 
+    //a : any 
+}

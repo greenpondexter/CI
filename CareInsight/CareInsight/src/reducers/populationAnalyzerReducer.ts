@@ -1,5 +1,5 @@
 import {Record, Map} from 'immutable';
-import {LOAD_POP_ANALYZER, Action} from '../actions/actionsInterface';
+import {LOAD_POP_ANALYZER, BRUSH_UPDATE, Action} from '../actions/actionsInterface';
 import {switchPage} from '../actions/sessionActions';
 
 
@@ -26,3 +26,17 @@ export function populationAnalyzerReducer( state = initState, action: Action<LOA
             return state; 
     }
 }
+
+export function populationAnalyzerOnBrushReducer( state = initState, action: Action<BRUSH_UPDATE>){
+    switch(action.type){
+        case 'BRUSH_UPDATE':
+            return Record({'fullSet' : action.payload.fullSet,
+                           'crossFilterSet' : action.payload.crossFilterSet,
+                           'membersSelected' : action.payload.membersSelected,
+                           'prosDimension'  : action.payload.prosDimension 
+                         })
+        default:
+            return state; 
+    }
+}
+

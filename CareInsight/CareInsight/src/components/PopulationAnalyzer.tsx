@@ -16,6 +16,7 @@ import {TargetedPopAreaPageProps} from '../containers/TargetedPopAreaContainer'
 import {Provider} from 'react-redux'
 import NavBar from './NavBar';
 import {TargetedPopAreaContainer} from '../containers/TargetedPopAreaContainer'
+import {ProsScatterPlotChartContainer} from '../containers/ProsScatterPlotChartContainer'
 import store from '../../js/Entry'
 // import AltContainer from 'alt-container';
 import {Panel, Row, Col} from 'react-bootstrap';
@@ -40,9 +41,9 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
             <NavBar />
           </div>
           <Row>
-                <TargetedPopAreaContainer/>
+            <TargetedPopAreaContainer/>
           </Row>
-          {/*<div className='col-lg-12 allCharts'>
+          <div className='col-lg-12 allCharts'>
            <Row>
             <Col md={1}></Col>
                 <Col md={10}>
@@ -53,21 +54,12 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
                             <Row style={{maxHeight: 250}}>
                               <Col md={1}></Col>
                                 <Col md={10} style={{maxHeight: 450}}>
-                                  <AltContainer stores = {[MemberDataStore]} 
-                                                inject = {{
-                                                  dimension : () => MemberDataStore.getState().prosDimension,
-                                                  crossfilterSet : () => MemberDataStore.getState().crossfilterSet,
-                                                  dimensionId: () => "cur_pros_risk_score",
-                                                  dimensionTitle: () => "Prospective Risk",
-                                                  counter: () => MemberDataStore.getState().counter
-                                                } }>
-                                    <ProsScatterPlotChart width={400} height={400}/>
-                                  </AltContainer>
+                                    <ProsScatterPlotChartContainer/>
                                 </Col>
                               <Col md={1}></Col>
                             </Row>
                           </Col>
-                          <Col md={7}>
+                          {/*<Col md={7}>
                              <Row style={{maxHeight: 250}}>
                                   <Col md={6} style={{maxHeight: 250}}>
                                     <AltContainer stores = {[MemberDataStore]} 
@@ -120,7 +112,7 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
                                     </AltContainer>
                                   </Col>
                              </Row>
-                          </Col>
+                          </Col>*/}
                         </Row>
                     </div>
                   </Panel>
@@ -128,7 +120,7 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
               <Col md={1}></Col>
           </Row>
             </div>
-            <div className='col-lg-12' data-step='5' data-intro='Targeted member list'>
+            {/*<div className='col-lg-12' data-step='5' data-intro='Targeted member list'>
               <Panel header="Members" bsStyle="careinsight">
                 <AltContainer stores = {[MemberDataStore]} inject = {{
                     tableSet : () => MemberDataStore.getState().tableSet

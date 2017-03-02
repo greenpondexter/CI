@@ -1,16 +1,14 @@
-import React from 'react';
-import d3 from 'd3';
-import dc from 'dc';
+import * as React from 'react';
+import * as d3 from 'd3';
+import * as dc from 'dc';
 import {Row, Col} from 'react-bootstrap';
-import MemberActions from '../actions/MemberActions';
-import $ from 'jquery';
+import {ProsScatterPlotChartPageProps} from '../containers/ProsScatterPlotChartContainer'
 
-export default class ScatterPlotChart extends React.Component{
-  constructor(props){
+export default class ProsScatterPlotChart extends React.Component<ProsScatterPlotChartPageProps,any>{
+  constructor(props: ProsScatterPlotChartPageProps){
         super(props);   
     }
   
-
 
   render() {
       var self = this;
@@ -34,26 +32,21 @@ export default class ScatterPlotChart extends React.Component{
       );
   }
 
-  componentDidMount(prevProps, prevState){
+  componentDidMount(prevProps: ProsScatterPlotChartPageProps, prevState: ProsScatterPlotChartPageProps){
 
-      if (typeof(this.props.dimension) == "undefined" || this.props.dimension === null) return; 
+      if (typeof(this.props.prosDimension) == "undefined" || this.props.prosDimension === null) return; 
 
       var self = this;
-      if (self.props.visible == 'dimFadeIn')
-        $('.prosScatterPlotChart').parent().hide().fadeIn(500);
-
-      if (self.dcLoaded == true)
-        return;
-
-      var dimension = self.props.dimension;
-      var group = dimension.group(function(d){
+      
+      var dimension = self.props.prosDimension;
+      var group = dimension.group(function(d:Array<number>){
         return [(Math.round(d[0] * 10) / 10),
                 ( Math.round(d[1] * 10) / 10) ]  
       });
       var nf1 = d3.format(".1f");
 
-      self.chart = dc.scatterPlot('.prosScatterPlotChart');
-      self.chart.width(self.props.width)
+      let chart = dc.scatterPlot('.prosScatterPlotChart');
+      chart.width(self.props.width)
         .height(self.props.height)
         .symbolSize(8)
         .clipPadding(10)
@@ -73,16 +66,17 @@ export default class ScatterPlotChart extends React.Component{
         .on('filtered', function(chart, filter){
           var c = chart;
           var f = filter;
-          MemberActions.filterUpdate();
+          //MemberActions.filterUpdate();
+          self.props.onPopulationAnalyzerBrushUpdate();
           dc.redrawAll();
         })
         //.mouseZoomable(true)
         .render();
-    self.dcLoaded = true;
+   
   }
 
   reset(){
-    this.chart.filterAll();
+    //chart.filterAll();
     dc.redrawAll();
   }
 }

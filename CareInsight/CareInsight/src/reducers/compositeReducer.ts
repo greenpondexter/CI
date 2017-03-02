@@ -1,10 +1,11 @@
 import {combineReducers } from 'redux'
 import {switchPageReducer} from './sessionReducer'
-import {populationAnalyzerReducer} from './populationAnalyzerReducer'
+import {populationAnalyzerReducer, populationAnalyzerOnBrushReducer} from './populationAnalyzerReducer'
 
 const compositeReducer = combineReducers({
     switchPageReducer,
-    populationAnalyzerReducer
+    populationAnalyzerReducer,
+    populationAnalyzerOnBrushReducer
 })
 
 export default compositeReducer

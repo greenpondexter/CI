@@ -1,9 +1,28 @@
-import {call, put, take, takeLatest, takeEvery} from 'redux-saga/effects' 
+import {call, put, take, takeLatest, takeEvery, select} from 'redux-saga/effects' 
 import * as crossfilter from 'crossfilter';
 import {List, Map, Set, fromJS} from 'immutable'
 import * as alasql from 'alasql';
 import * as _ from 'lodash';
-import {LOAD_POP_ANALYZER} from '../actions/actionsInterface'
+import {LOAD_POP_ANALYZER, BRUSH_UPDATE} from '../actions/actionsInterface'
+import store from '../../js/Entry'
+import {getEntireTree} from '../reducers/selectors'
+
+
+
+export function* rootSaga(): any{
+   yield [
+    initializeProfileStore(),
+    handleBrushEvent()
+  ] 
+}
+
+function* initializeProfileStore():any{
+  yield takeEvery('TRIGGER_POP_ANALYZER_LOAD', loadPopAnalyzerSaga)
+}
+
+function* handleBrushEvent():any{
+  yield takeEvery('TRIGGER_BRUSH_UPDATE', processBrushEventSaga)
+}
 
 // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
 function* loadPopAnalyzerSaga() {
@@ -18,16 +37,58 @@ function* loadPopAnalyzerSaga() {
   yield put({ type: 'LOAD_POP_ANALYZER', payload: finalOutput})
 }
 
-function* initializeProfileStore():any{
-  yield takeEvery('TRIGGER_POP_ANALYZER_LOAD', loadPopAnalyzerSaga)
+// Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
+function* processBrushEventSaga() {
+  
+  const state = yield select(getEntireTree)
+  
+  const _fullSet = state.populationAnalyzerReducer().get('fullSet')
+  const _crossfilterSet = state.populationAnalyzerReducer().get('crossFilterSet')
+  const _membersSelected = state.populationAnalyzerReducer().get('membersSelected')
+  const _prosDimension = state.populationAnalyzerReducer().get('prosDimension')
+  //const _tableSet = generateMemberTable(_fullSet, _membersSelected)
+
+  const finalOutput : BRUSH_UPDATE = {
+    fullSet : _fullSet,
+    crossFilterSet : _crossfilterSet,
+    membersSelected : _membersSelected,
+    prosDimension : _prosDimension
+  } 
+  yield put({ type: 'BRUSH_UPDATE', payload: finalOutput})
 }
 
-export function* rootSaga(): any{
-   yield [
-    initializeProfileStore()
-  ] 
-}
+function generateMemberTable(_fullSet:Array<IfullSet>, _membersSelected:any):any{
 
+    const fS = _fullSet;
+    const keys = _membersSelected.group().all()
+
+    const convertToMoney = (d:any) => {return '$' + d.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}
+
+    alasql.fn['convertToMoney'] = convertToMoney; 
+
+    return ( alasql(`SELECT 
+                            fS.member_key
+                            ,fS.age
+                            ,fS.mm_count
+                            ,convertToMoney(fS.amt_paid) amt_paid
+                            ,convertToMoney(fS.amt_allowed) amt_allowed
+                            ,fS.cchg
+                            ,fS.qty_pcp_visits
+                            ,fS.qty_spec_visits
+                            ,fS.qty_ed_admits
+                            ,fS.qty_admits
+                            ,fS.cur_pros_risk_score
+                            ,fS.prev_pros_risk_score
+                            ,fS.cur_pro_op
+                            ,fS.cur_pro_ip
+                            from ? fS 
+                            join ? keys 
+                              on CAST(fS.member_key AS NUMBER) = keys.key 
+                            where keys.value = 1`,[fS,keys])
+          )
+
+
+}
 
 function ajaxRequest():any{
         
@@ -115,4 +176,3 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
 
       //generateMemberTable();
 }
-

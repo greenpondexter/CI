@@ -1,0 +1,1 @@
+export const getEntireTree = (state: any) => state
