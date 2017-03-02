@@ -9,7 +9,7 @@ export type LOAD_POP_ANALYZER = {
      fullSet: Array<any>,
      crossFilterSet: any, 
      membersSelected : any,
-    // erDimension: any,
+     erDimension: any,
      prosDimension: any
     // admitsDimension: any,
     // edCasesDimension: any 
@@ -26,7 +26,7 @@ export type BRUSH_UPDATE = {
      fullSet: Array<any>,
      crossFilterSet: any, 
      membersSelected : any,
-    // erDimension: any,
+     erDimension: any,
      prosDimension: any
     // admitsDimension: any,
     // edCasesDimension: any 

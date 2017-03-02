@@ -32,7 +32,8 @@ function* loadPopAnalyzerSaga() {
     fullSet : initDataset,
     crossFilterSet : proccessedMembers.crossfilterSet,
     membersSelected : proccessedMembers.membersSelected,
-    prosDimension : proccessedMembers.prosDimension
+    prosDimension : proccessedMembers.prosDimension,
+    erDimension : proccessedMembers.erDimension 
   } 
   yield put({ type: 'LOAD_POP_ANALYZER', payload: finalOutput})
 }
@@ -46,13 +47,15 @@ function* processBrushEventSaga() {
   const _crossfilterSet = state.populationAnalyzerReducer().get('crossFilterSet')
   const _membersSelected = state.populationAnalyzerReducer().get('membersSelected')
   const _prosDimension = state.populationAnalyzerReducer().get('prosDimension')
+  const _erDimension = state.populationAnalyzerReducer().get('erDimension')
   //const _tableSet = generateMemberTable(_fullSet, _membersSelected)
 
   const finalOutput : BRUSH_UPDATE = {
     fullSet : _fullSet,
     crossFilterSet : _crossfilterSet,
     membersSelected : _membersSelected,
-    prosDimension : _prosDimension
+    prosDimension : _prosDimension,
+    erDimension : _erDimension
   } 
   yield put({ type: 'BRUSH_UPDATE', payload: finalOutput})
 }
@@ -134,6 +137,7 @@ interface ProcessMemberSet {
   crossfilterSet : any;
   membersSelected : any;
   prosDimension : any; 
+  erDimension : any; 
 }
 
 function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
@@ -158,7 +162,7 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
       // dimension for scatter plot chart
       let _prosDimension = _crossfilterSet.dimension(function(d){ return [+d.prev_pros_risk_score, +d.cur_pros_risk_score]});
       // dimension for er bar chart
-      let erDimension = _crossfilterSet.dimension(function(d){ return d.cur_pro_op});
+      let _erDimension = _crossfilterSet.dimension(function(d){ return d.cur_pro_op});
       // dimension for ip bar chart
       let ipDimension = _crossfilterSet.dimension(function(d){ return d.cur_pro_ip});
       // dimension for admits breakdown bar chart 
@@ -171,7 +175,8 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
       return {
         crossfilterSet : _crossfilterSet,
         membersSelected : _membersSelected,
-        prosDimension : _prosDimension
+        prosDimension : _prosDimension,
+        erDimension : _erDimension
       }
 
       //generateMemberTable();

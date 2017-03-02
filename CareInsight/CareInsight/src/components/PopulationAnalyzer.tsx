@@ -17,6 +17,7 @@ import {Provider} from 'react-redux'
 import NavBar from './NavBar';
 import {TargetedPopAreaContainer} from '../containers/TargetedPopAreaContainer'
 import {ProsScatterPlotChartContainer} from '../containers/ProsScatterPlotChartContainer'
+import {ErBarChartContainer} from '../containers/ErBarChartContainer'
 import store from '../../js/Entry'
 // import AltContainer from 'alt-container';
 import {Panel, Row, Col} from 'react-bootstrap';
@@ -59,21 +60,12 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
                               <Col md={1}></Col>
                             </Row>
                           </Col>
-                          {/*<Col md={7}>
+                            <Col md={7}>
                              <Row style={{maxHeight: 250}}>
                                   <Col md={6} style={{maxHeight: 250}}>
-                                    <AltContainer stores = {[MemberDataStore]} 
-                                                  inject = {{
-                                                    dimension : () => MemberDataStore.getState().erDimension,
-                                                    crossfilterSet : () => MemberDataStore.getState().crossfilterSet,
-                                                    dimensionId: () => "cur_pro_op",
-                                                    dimensionTitle: () => "ED Visit Probability",
-                                                    counter: () => MemberDataStore.getState().counter
-                                                  } }>
-                                      <ErBarChart width={330} height={230}/>
-                                    </AltContainer>
+                                      <ErBarChartContainer/>
                                   </Col>
-                                  <Col md={6} style={{maxHeight: 250}}>
+                                  {/*<Col md={6} style={{maxHeight: 250}}>
                                     <AltContainer stores = {[MemberDataStore]} 
                                                   inject = {{
                                                     dimension : () => MemberDataStore.getState().ipDimension,
@@ -84,9 +76,9 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
                                                   } }>
                                       <IpBarChart width={330} height={230}/>
                                     </AltContainer>
-                                  </Col>
+                                  </Col>*/}
                               </Row>
-                              <Row style={{maxHeight: 250}}>
+                              {/*<Row style={{maxHeight: 250}}>
                                  <Col md={6} style={{maxHeight: 250}}>
                                     <AltContainer stores = {[MemberDataStore]} 
                                                   inject = {{
@@ -111,8 +103,8 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
                                       <AdmitsBarChart width={330} height={240}/>
                                     </AltContainer>
                                   </Col>
-                             </Row>
-                          </Col>*/}
+                             </Row>*/}
+                          </Col>
                         </Row>
                     </div>
                   </Panel>

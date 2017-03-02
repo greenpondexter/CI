@@ -1,23 +1,16 @@
-import React from 'react';
-import d3 from 'd3';
-import dc from 'dc';
+import * as React from 'react';
+import * as d3 from 'd3';
+import * as dc from 'dc';
 import {Row, Col} from 'react-bootstrap';
-import $ from 'jquery';
-import ImmutablePropTypes from 'react-immutable-proptypes';
-import MemberActions from '../actions/MemberActions';
+import {ErBarChartPageProps} from '../containers/ErBarChartContainer'
 
-export default class ErBarChart extends React.Component{
-  constructor(props){
+export default class ErBarChart extends React.Component<ErBarChartPageProps,any>{
+  constructor(props:ErBarChartPageProps){
         super(props);
-        
     }
 
-  shouldComponentUpdate(nextProps, nextState){
-    return  (this.props.counter.get(0) != nextProps.counter.get(0) 
-            || this.props.counter.get(0) == 0 ) &&
-            this.props.dimension !== null 
-            
-            ? true : false; 
+  shouldComponentUpdate(nextProps: ErBarChartPageProps, nextState:ErBarChartPageProps){
+    return   this.props.erDimension !== null ? true : false 
   }
 
   render() {
@@ -42,38 +35,39 @@ export default class ErBarChart extends React.Component{
 
   componentDidUpdate(){
 
-    if (typeof(this.props.dimension) == "undefined" || this.props.dimension === null ) return;
+    if (typeof(this.props.erDimension) == "undefined" || this.props.erDimension === null ) return;
       //access er chart
        let chart = dc.chartRegistry.list('erBarChart')[0];
 
        //determine what max is for y-axis
-       var yMax = this.props.dimension.group(function (d) {
+       let yMax: number;
+       yMax = this.props.erDimension.group(function (d:number) {
          return Math.round(d * 10) / 10;
-       }).top(1)[0].value
+       }).top(1)[0].value;
       
        //redraw 
-       chart.y(d3.scale.linear().domain([0,yMax]).range([0,yMax]))
-            .redraw()
+       (chart as any).y(d3.scale.linear().domain([0,yMax]).range([0,yMax]))
+            .redraw();
   }
 
-  componentDidMount(prevProps, prevState){
+  componentDidMount(prevProps: ErBarChartPageProps, prevState: ErBarChartPageProps){
 
-    if (typeof(this.props.dimension) == "undefined" || this.props.dimension === null ) return;
+    if (typeof(this.props.erDimension) == "undefined" || this.props.erDimension === null ) return;
       var self = this;
 
-      var dimension = self.props.dimension;
-      var group = dimension.group(function(d){
+      var dimension = self.props.erDimension;
+      var group = dimension.group(function(d:number){
           return Math.round(d * 10) / 10;
         }
       );
       var dimMax = Math.ceil(dimension.top(1)[0]['cur_pro_op']);
-      var yMax = dimension.group(function (d) {
+      var yMax = dimension.group(function (d:number) {
         return Math.round(d * 10) / 10;
       }).top(1)[0].value
       var nf1 = d3.format(".1f");
 
-      self.chart = dc.barChart('.erBarChart', 'erBarChart');
-      self.chart.width(self.props.width)
+      const chart = dc.barChart('.erBarChart', 'erBarChart');
+      chart.width(self.props.width)
         .height(self.props.height)
         .dimension(dimension)
         .group(group)
@@ -88,23 +82,16 @@ export default class ErBarChart extends React.Component{
         .on('filtered', function(chart, filter){
           var c = chart;
           var f = filter;
-          MemberActions.filterUpdate();
+          self.props.onPopulationAnalyzerBrushUpdate()
           dc.redrawAll();
+          
         })
         .render();
 
-    self.dcLoaded = true;
   }
 
   reset(){
-    this.chart.filterAll();
+    //this.chart.filterAll();
     dc.redrawAll();
   }
 }
-
-ErBarChart.propTypes = {
-  counter : ImmutablePropTypes.list,
-  dimension : React.PropTypes.object 
-}
-
-module.exports = ErBarChart;
