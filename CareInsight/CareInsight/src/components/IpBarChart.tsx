@@ -1,22 +1,19 @@
-import React from 'react';
-import d3 from 'd3';
-import dc from 'dc';
+import * as React from 'react';
+import * as d3 from 'd3';
+import * as dc from 'dc';
 import {Row, Col} from 'react-bootstrap';
-import $ from 'jquery';
-import MemberActions from '../actions/MemberActions';
+import {IpBarChartPageProps} from '../containers/IpBarChartContainer'
 
-export default class IpBarChart extends React.Component{
 
-  constructor(props){
+export default class IpBarChart extends React.Component<IpBarChartPageProps, any>{
+
+  constructor(props: IpBarChartPageProps){
         super(props);
         
     }
 
-  shouldComponentUpdate(nextProps, nextState){
-      return (this.props.counter.get(0) != nextProps.counter.get(0) 
-            || this.props.counter.get(0) == 0) &&
-            this.props.dimension !== null 
-            ? true : false; 
+  shouldComponentUpdate(nextProps: IpBarChartPageProps, nextState:IpBarChartPageProps){
+    return   this.props.ipDimension !== null ? true : false 
   }
 
   render() {
@@ -42,27 +39,28 @@ export default class IpBarChart extends React.Component{
   
   componentDidUpdate(){
 
-    if (typeof(this.props.dimension) == "undefined" || this.props.dimension === null) return;
+    if (typeof(this.props.ipDimension) == "undefined" || this.props.ipDimension === null) return;
     //access ip chart
     let chart = dc.chartRegistry.list('ipBarChart')[0];
 
     //determine what max is for y-axis
-    let yMax = this.props.dimension.group(function (d) {
+    let yMax : number; 
+    yMax = this.props.ipDimension.group(function (d:number) {
         return Math.round(d * 10) / 10;
-      }).top(1)[0].value
+      }).top(1)[0].value;
 
     //redraw  
-    chart.y(d3.scale.linear().domain([0,yMax]).range([0,yMax]))
+    (chart as any).y(d3.scale.linear().domain([0,yMax]).range([0,yMax]))
             .redraw()
   }
 
-  componentDidMount(prevProps, prevState){
+  componentDidMount(prevProps: IpBarChartPageProps, prevState: IpBarChartPageProps){
 
-    if (typeof(this.props.dimension) == "undefined" || this.props.dimension === null ) return;
+    if (typeof(this.props.ipDimension) == "undefined" || this.props.ipDimension === null ) return;
       var self = this;
 
-      var dimension = self.props.dimension;
-      var group = dimension.group(function(d){
+      var dimension = self.props.ipDimension;
+      var group = dimension.group(function(d: number){
           return Math.round(d * 10) / 10;
         }
       );
@@ -70,8 +68,8 @@ export default class IpBarChart extends React.Component{
       var dimMax = Math.ceil(dimension.top(1)[0]['cur_pro_ip']);
       var nf1 = d3.format(".1f");
 
-      self.chart = dc.barChart('.ipBarChart', 'ipBarChart');
-      self.chart.width(self.props.width)
+      const chart = dc.barChart('.ipBarChart', 'ipBarChart');
+      chart.width(self.props.width)
         .height(self.props.height)
         .dimension(dimension)
         .group(group)
@@ -84,22 +82,15 @@ export default class IpBarChart extends React.Component{
           return 'from ' + nf1(filters[0][0]) + ' to ' + nf1(filters[0][1]);
         })
         .on('filtered', function(chart, filter){
-          MemberActions.filterUpdate();
+          self.props.onPopulationAnalyzerBrushUpdate()
           dc.redrawAll();
         })
         .render();
 
-    self.dcLoaded = true;
   }
   
   reset(){
-    this.chart.filterAll();
+    //this.chart.filterAll();
     dc.redrawAll();
   }
-}
-
-
-IpBarChart.propTypes = {
-  counter : React.PropTypes.number ,
-  dimension : React.PropTypes.object
 }

@@ -8,7 +8,10 @@ export function loadPopAnalyzer(data:LOAD_POP_ANALYZER): Action<LOAD_POP_ANALYZE
             crossFilterSet : data.crossFilterSet, 
             membersSelected : data.membersSelected,
             prosDimension : data.prosDimension,
-            erDimension: data.erDimension
+            erDimension: data.erDimension,
+            ipDimension: data.ipDimension,
+            admitsDimension: data.admitsDimension,
+            edCasesDimension : data.edCasesDimension
         } 
     }
 }
@@ -39,7 +42,10 @@ export function brushUpdate(data:BRUSH_UPDATE): Action<BRUSH_UPDATE>{
             crossFilterSet : data.crossFilterSet, 
             membersSelected : data.membersSelected,
             prosDimension : data.prosDimension,
-            erDimension : data.erDimension
+            erDimension : data.erDimension,
+            ipDimension : data.ipDimension,
+            admitsDimension : data.admitsDimension,
+            edCasesDimension : data.edCasesDimension
         } 
     }
 }

@@ -18,17 +18,18 @@ import NavBar from './NavBar';
 import {TargetedPopAreaContainer} from '../containers/TargetedPopAreaContainer'
 import {ProsScatterPlotChartContainer} from '../containers/ProsScatterPlotChartContainer'
 import {ErBarChartContainer} from '../containers/ErBarChartContainer'
+import {IpBarChartContainer} from '../containers/IpBarChartContainer'
+import {EdCasesBarChartContainer} from '../containers/EdCasesBarChartContainer'
+import {AdmitsBarChartContainer} from '../containers/AdmitsBarChartContainer'
 import store from '../../js/Entry'
 // import AltContainer from 'alt-container';
 import {Panel, Row, Col} from 'react-bootstrap';
 
 
 export default class PopulationAnalyzer extends React.Component<TargetedPopAreaPageProps, any>{
-
   constructor(props: TargetedPopAreaPageProps){
         super(props);   
     }
-
 
   render () {
     
@@ -65,45 +66,18 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
                                   <Col md={6} style={{maxHeight: 250}}>
                                       <ErBarChartContainer/>
                                   </Col>
-                                  {/*<Col md={6} style={{maxHeight: 250}}>
-                                    <AltContainer stores = {[MemberDataStore]} 
-                                                  inject = {{
-                                                    dimension : () => MemberDataStore.getState().ipDimension,
-                                                    crossfilterSet : () => MemberDataStore.getState().crossfilterSet,
-                                                    dimensionId: () => "cur_pro_ip",
-                                                    dimensionTitle: () => "IP Visit Probability",
-                                                    counter: () => MemberDataStore.getState().counter 
-                                                  } }>
-                                      <IpBarChart width={330} height={230}/>
-                                    </AltContainer>
-                                  </Col>*/}
+                                  <Col md={6} style={{maxHeight: 250}}>
+                                      <IpBarChartContainer/>
+                                  </Col>
                               </Row>
-                              {/*<Row style={{maxHeight: 250}}>
+                              <Row style={{maxHeight: 250}}>
                                  <Col md={6} style={{maxHeight: 250}}>
-                                    <AltContainer stores = {[MemberDataStore]} 
-                                                  inject = {{
-                                                    dimension : () => MemberDataStore.getState().edCasesDimension,
-                                                    crossfilterSet : () => MemberDataStore.getState().crossfilterSet,
-                                                    dimensionId: () => "qty_ed_admits",
-                                                    dimensionTitle: () => "ED Cases",
-                                                    counter: () => MemberDataStore.getState().counter
-                                                  } }>
-                                      <EdCasesBarChart width={330} height={240}/>
-                                    </AltContainer>
+                                      <EdCasesBarChartContainer/>
                                   </Col>
                                  <Col md={6} style={{maxHeight: 250}}>
-                                    <AltContainer stores = {[MemberDataStore]} 
-                                                  inject = {{
-                                                    dimension : () => MemberDataStore.getState().admitsDimension,
-                                                    crossfilterSet : () => MemberDataStore.getState().crossfilterSet,
-                                                    dimensionId: () => "qty_admits",
-                                                    dimensionTitle: () => "Admits",
-                                                    counter: () => MemberDataStore.getState().counter
-                                                  } }>
-                                      <AdmitsBarChart width={330} height={240}/>
-                                    </AltContainer>
+                                      <AdmitsBarChartContainer/>
                                   </Col>
-                             </Row>*/}
+                             </Row>
                           </Col>
                         </Row>
                     </div>

@@ -1,4 +1,4 @@
-import {call, put, take, takeLatest, takeEvery, select} from 'redux-saga/effects' 
+import {call, fork, put, take, takeLatest, takeEvery, select} from 'redux-saga/effects' 
 import * as crossfilter from 'crossfilter';
 import {List, Map, Set, fromJS} from 'immutable'
 import * as alasql from 'alasql';
@@ -11,8 +11,8 @@ import {getEntireTree} from '../reducers/selectors'
 
 export function* rootSaga(): any{
    yield [
-    initializeProfileStore(),
-    handleBrushEvent()
+    fork(initializeProfileStore),
+    fork(handleBrushEvent)
   ] 
 }
 
@@ -33,7 +33,10 @@ function* loadPopAnalyzerSaga() {
     crossFilterSet : proccessedMembers.crossfilterSet,
     membersSelected : proccessedMembers.membersSelected,
     prosDimension : proccessedMembers.prosDimension,
-    erDimension : proccessedMembers.erDimension 
+    erDimension : proccessedMembers.erDimension,
+    ipDimension : proccessedMembers.ipDimension,
+    edCasesDimension : proccessedMembers.edCasesDimension,
+    admitsDimension : proccessedMembers.admitsDimension
   } 
   yield put({ type: 'LOAD_POP_ANALYZER', payload: finalOutput})
 }
@@ -48,6 +51,9 @@ function* processBrushEventSaga() {
   const _membersSelected = state.populationAnalyzerReducer().get('membersSelected')
   const _prosDimension = state.populationAnalyzerReducer().get('prosDimension')
   const _erDimension = state.populationAnalyzerReducer().get('erDimension')
+  const _ipDimension = state.populationAnalyzerReducer().get('ipDimension')
+  const _admitsDimension = state.populationAnalyzerReducer().get('admitsDimension')
+  const _edCasesDimension = state.populationAnalyzerReducer().get('edCasesDimension')
   //const _tableSet = generateMemberTable(_fullSet, _membersSelected)
 
   const finalOutput : BRUSH_UPDATE = {
@@ -55,7 +61,10 @@ function* processBrushEventSaga() {
     crossFilterSet : _crossfilterSet,
     membersSelected : _membersSelected,
     prosDimension : _prosDimension,
-    erDimension : _erDimension
+    erDimension : _erDimension,
+    ipDimension : _ipDimension, 
+    admitsDimension : _admitsDimension,
+    edCasesDimension : _edCasesDimension
   } 
   yield put({ type: 'BRUSH_UPDATE', payload: finalOutput})
 }
@@ -138,6 +147,9 @@ interface ProcessMemberSet {
   membersSelected : any;
   prosDimension : any; 
   erDimension : any; 
+  ipDimension : any; 
+  admitsDimension : any;
+  edCasesDimension : any; 
 }
 
 function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
@@ -164,11 +176,11 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
       // dimension for er bar chart
       let _erDimension = _crossfilterSet.dimension(function(d){ return d.cur_pro_op});
       // dimension for ip bar chart
-      let ipDimension = _crossfilterSet.dimension(function(d){ return d.cur_pro_ip});
+      let _ipDimension = _crossfilterSet.dimension(function(d){ return d.cur_pro_ip});
       // dimension for admits breakdown bar chart 
-      let admitsDimension = _crossfilterSet.dimension(function(d){ return d.qty_admits})
+      let _admitsDimension = _crossfilterSet.dimension(function(d){ return d.qty_admits})
       // dimension for admits breakdown bar chart 
-      let edCasesDimension = _crossfilterSet.dimension(function(d){ return d.qty_ed_admits})
+      let _edCasesDimension = _crossfilterSet.dimension(function(d){ return d.qty_ed_admits})
 
       let _membersSelected = _crossfilterSet.dimension(function(d){return d.member_key})
 
@@ -176,7 +188,10 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
         crossfilterSet : _crossfilterSet,
         membersSelected : _membersSelected,
         prosDimension : _prosDimension,
-        erDimension : _erDimension
+        erDimension : _erDimension,
+        ipDimension : _ipDimension,
+        admitsDimension : _admitsDimension,
+        edCasesDimension : _edCasesDimension
       }
 
       //generateMemberTable();

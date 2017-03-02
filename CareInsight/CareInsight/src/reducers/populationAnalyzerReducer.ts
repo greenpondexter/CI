@@ -21,7 +21,10 @@ export function populationAnalyzerReducer( state = initState, action: Action<LOA
                            'crossFilterSet' : action.payload.crossFilterSet,
                            'membersSelected' : action.payload.membersSelected,
                            'prosDimension'  : action.payload.prosDimension,
-                           'erDimension' : action.payload.erDimension
+                           'erDimension' : action.payload.erDimension,
+                           'ipDimension' : action.payload.ipDimension,
+                           'admitsDimension' : action.payload.admitsDimension,
+                           'edCasesDimension' : action.payload.edCasesDimension 
                          })
         default:
             return state; 
@@ -35,7 +38,10 @@ export function populationAnalyzerOnBrushReducer( state = initState, action: Act
                            'crossFilterSet' : action.payload.crossFilterSet,
                            'membersSelected' : action.payload.membersSelected,
                            'prosDimension'  : action.payload.prosDimension,
-                           'erDimension' : action.payload.erDimension
+                           'erDimension' : action.payload.erDimension,
+                           'ipDimension' : action.payload.ipDimension, 
+                           'admitsDimension' : action.payload.admitsDimension,
+                           'edCasesDimension' : action.payload.edCasesDimension
                          })
         default:
             return state; 

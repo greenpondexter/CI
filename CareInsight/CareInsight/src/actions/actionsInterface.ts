@@ -10,10 +10,10 @@ export type LOAD_POP_ANALYZER = {
      crossFilterSet: any, 
      membersSelected : any,
      erDimension: any,
-     prosDimension: any
-    // admitsDimension: any,
-    // edCasesDimension: any 
-    //a : any 
+     prosDimension: any,
+     ipDimension: any
+     admitsDimension: any,
+     edCasesDimension: any 
 }
 export type TRIGGER_POP_ANALYZER_LOAD = {
     count: number 
@@ -27,8 +27,8 @@ export type BRUSH_UPDATE = {
      crossFilterSet: any, 
      membersSelected : any,
      erDimension: any,
-     prosDimension: any
-    // admitsDimension: any,
-    // edCasesDimension: any 
-    //a : any 
+     prosDimension: any,
+     ipDimension: any
+     admitsDimension: any,
+     edCasesDimension: any 
 }
