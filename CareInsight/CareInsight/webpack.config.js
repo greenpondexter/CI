@@ -13,26 +13,17 @@ module.exports = {
     filename   : 'bundle.js'
  },
   module: {
-    // preLoaders: [
-    // // {
-    // //   test     : /\.jsx$/,
-    // //   exclude  : /node_modules/,
-    // //   loader   : 'jshint-loader'
-    // // },
-    // {
-    //     test: /\.jsx?$/,
-    //     loaders: ['eslint'],
-    //     exclude: /node_modules/
-    // }
-    
-    // ],
-    
     loaders: [
     {
       test     : /\.jsx$/,
       loaders  : ['babel?presets[]=react,presets[]=es2015'],
       exclude  : [path.join(__dirname, 'node_modules')]
     },
+    {
+      test: /\.ts$/,
+      enforce: 'pre',
+      loader: 'tslint-loader'
+     },
     {
       test: /\.tsx?$/, 
       loaders: ["react-hot-loader","awesome-typescript-loader"] 
@@ -58,17 +49,6 @@ module.exports = {
     
     ]
   },
-  // jshint: {
-  //   camelcase : true,
-  //   esversion : 6,
-  //   curly     : true, // requires braces around blocks in loops and conitionals
-  //   eqeqeq    : true, // forces usage of === over ==
-  //   undef     : true, // prohibits use of explicitly undeclared variables (value = undefined)
-  //   unused    : true, // triggers warning about unused variables
-  //   varstmt   : true, // disallows usage of 'var', forces 'let' and 'const'
-  //   browser   : true, // able to use variables like 'alert' and 'console'
-  //   devel     : true // able to use 'console' and 'alert'
-  // },
   resolve: {
     extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
     alias: {
