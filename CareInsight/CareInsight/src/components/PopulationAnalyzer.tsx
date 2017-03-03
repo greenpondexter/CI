@@ -2,17 +2,6 @@
 import * as React from 'react';
 import * as d3 from 'd3';
 import {TargetedPopAreaPageProps} from '../containers/TargetedPopAreaContainer'
-// import MemberDataStore from '../stores/MemberDataStore';
-// import MemberActions from '../actions/MemberActions'
-// import ErBarChart from './ErBarChart.jsx';
-// import IpBarChart from './IpBarChart.jsx';
-// import AdmitsBarChart from './AdmitsBarChart.jsx'
-// import EdCasesBarChart from './EdCasesBarChart.jsx'
-// import ProsScatterPlotChart from './ProsScatterPlotChart.jsx';
-// import MaraConditionHeatMap from './MaraConditionHeatMap';
-// import TargetedPopTable from './TargetedPopTable.jsx'
-// import MemberTable from './MemberTable.jsx';
-// import ChartNav from './ChartNav.jsx';
 import {Provider} from 'react-redux'
 import NavBar from './NavBar';
 import {TargetedPopAreaContainer} from '../containers/TargetedPopAreaContainer'
@@ -21,10 +10,9 @@ import {ErBarChartContainer} from '../containers/ErBarChartContainer'
 import {IpBarChartContainer} from '../containers/IpBarChartContainer'
 import {EdCasesBarChartContainer} from '../containers/EdCasesBarChartContainer'
 import {AdmitsBarChartContainer} from '../containers/AdmitsBarChartContainer'
-import store from '../../js/Entry'
-// import AltContainer from 'alt-container';
-import {Panel, Row, Col} from 'react-bootstrap';
-
+import store from './Entry'
+import {Panel, Row, Col} from 'react-bootstrap'
+import {TargetedPopTableContainer} from '../containers/TargetedPopTableContainer'
 
 export default class PopulationAnalyzer extends React.Component<TargetedPopAreaPageProps, any>{
   constructor(props: TargetedPopAreaPageProps){
@@ -86,13 +74,9 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
               <Col md={1}></Col>
           </Row>
             </div>
-            {/*<div className='col-lg-12' data-step='5' data-intro='Targeted member list'>
+            <div className='col-lg-12' data-step='5' data-intro='Targeted member list'>
               <Panel header="Members" bsStyle="careinsight">
-                <AltContainer stores = {[MemberDataStore]} inject = {{
-                    tableSet : () => MemberDataStore.getState().tableSet
-                  }}>
-                  <TargetedPopTable/>
-                </AltContainer>
+                  <TargetedPopTableContainer/>
               </Panel>
             </div>*/}
           </div>

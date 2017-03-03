@@ -24,7 +24,8 @@ export function populationAnalyzerReducer( state = initState, action: Action<LOA
                            'erDimension' : action.payload.erDimension,
                            'ipDimension' : action.payload.ipDimension,
                            'admitsDimension' : action.payload.admitsDimension,
-                           'edCasesDimension' : action.payload.edCasesDimension 
+                           'edCasesDimension' : action.payload.edCasesDimension,
+                           'tableSet' : action.payload.tableSet
                          })
         default:
             return state; 
@@ -41,10 +42,10 @@ export function populationAnalyzerOnBrushReducer( state = initState, action: Act
                            'erDimension' : action.payload.erDimension,
                            'ipDimension' : action.payload.ipDimension, 
                            'admitsDimension' : action.payload.admitsDimension,
-                           'edCasesDimension' : action.payload.edCasesDimension
+                           'edCasesDimension' : action.payload.edCasesDimension,
+                           'tableSet': action.payload.tableSet
                          })
         default:
             return state; 
     }
 }
-

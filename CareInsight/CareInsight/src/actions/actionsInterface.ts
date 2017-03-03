@@ -5,6 +5,7 @@ export interface Action<T>{
 }
 
 export type SWITCH_PAGE = {id: number, page: string} 
+
 export type LOAD_POP_ANALYZER = {
      fullSet: Array<any>,
      crossFilterSet: any, 
@@ -13,7 +14,8 @@ export type LOAD_POP_ANALYZER = {
      prosDimension: any,
      ipDimension: any
      admitsDimension: any,
-     edCasesDimension: any 
+     edCasesDimension: any,
+     tableSet: any
 }
 export type TRIGGER_POP_ANALYZER_LOAD = {
     count: number 
@@ -30,5 +32,6 @@ export type BRUSH_UPDATE = {
      prosDimension: any,
      ipDimension: any
      admitsDimension: any,
-     edCasesDimension: any 
+     edCasesDimension: any,
+     tableSet: any 
 }

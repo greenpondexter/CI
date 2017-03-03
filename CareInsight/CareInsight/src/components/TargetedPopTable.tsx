@@ -1,22 +1,18 @@
-import React from 'react';
-import d3 from 'd3';
-import dc from 'dc';
-import MemberProfileActions from '../actions/MemberProfileActions';
-import SessionActions from '../actions/SessionActions';
+import * as React from 'react';
+import * as d3 from 'd3';
+import * as dc from 'dc';
+import {Row, Col} from 'react-bootstrap';
+import {TargetedPopTablePageProps} from '../containers/TargetedPopTableContainer'
 import {Column, Table} from 'react-virtualized';
-import {Row, Col} from 'react-bootstrap'
+
 //import 'react-virtualized/styles.css';
 
-export default class TargetedPopTable extends React.Component{
-  
-  constructor(props){
+export default class TargetedPopTable extends React.Component<TargetedPopTablePageProps,any>{
+  constructor(props: TargetedPopTablePageProps){
         super(props);   
-
-        //this.rowRenderer = this.rowRenderer.bind(this);
     }
   
   render () {
-    //var self = this;
 
     return (
       <div >
@@ -30,7 +26,6 @@ export default class TargetedPopTable extends React.Component{
                   rowHeight={40}
                   rowCount={this.props.tableSet.length}
                   rowGetter={({ index }) => this.props.tableSet[index]}
-                  onRowClick={(d)=>{SessionActions.switchPage({page:'MEMBER_PROFILE', member_key: d.rowData.member_key})}}
                 >
                   <Column
                     label='ID'
@@ -99,10 +94,6 @@ export default class TargetedPopTable extends React.Component{
        </Row>
       </div>
     );
-  }
-  
-  componentDidUpdate(prevProps, prevState){
-    
   }
 }
 

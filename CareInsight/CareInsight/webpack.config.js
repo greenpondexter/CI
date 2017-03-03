@@ -7,7 +7,7 @@ var IgnorePlugin = require("webpack").IgnorePlugin;
 
 module.exports = {
   devtool : 'eval',
-  entry   : [path.resolve(__dirname, 'js', 'Entry.tsx')],
+  entry   : [path.resolve(__dirname, 'src', 'components', 'Entry.tsx')],
   output: {
     path       : path.join(__dirname, 'build'),
     filename   : 'bundle.js'

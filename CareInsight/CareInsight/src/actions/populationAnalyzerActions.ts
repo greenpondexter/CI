@@ -11,7 +11,8 @@ export function loadPopAnalyzer(data:LOAD_POP_ANALYZER): Action<LOAD_POP_ANALYZE
             erDimension: data.erDimension,
             ipDimension: data.ipDimension,
             admitsDimension: data.admitsDimension,
-            edCasesDimension : data.edCasesDimension
+            edCasesDimension : data.edCasesDimension,
+            tableSet : data.tableSet
         } 
     }
 }
@@ -45,7 +46,8 @@ export function brushUpdate(data:BRUSH_UPDATE): Action<BRUSH_UPDATE>{
             erDimension : data.erDimension,
             ipDimension : data.ipDimension,
             admitsDimension : data.admitsDimension,
-            edCasesDimension : data.edCasesDimension
+            edCasesDimension : data.edCasesDimension,
+            tableSet : data.tableSet
         } 
     }
 }

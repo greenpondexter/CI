@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {render} from 'react-dom';
-import App from '../src/components/App';
+import App from './App';
 import { createStore } from 'redux';
-import compositeReducer from '../src/reducers/compositeReducer'
+import compositeReducer from '../reducers/compositeReducer'
 import {Provider} from 'react-redux'
-import {SessionContainer} from '../src/containers/SessionContainer'
+import {SessionContainer} from '../containers/SessionContainer'
 import createSagaMiddleware from 'redux-saga'
 import {applyMiddleware} from 'redux';
-import {rootSaga} from '../src/sagas/memberProfileSaga'
+import {rootSaga} from '../sagas/rootSaga'
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
