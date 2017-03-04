@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import {LOAD_POP_ANALYZER, BRUSH_UPDATE} from '../actions/actionsInterface'
 import store from '../components/Entry'
 import {getEntireTree} from '../reducers/selectors'
-import {IfullSet, generateMemberTable} from './populationAnalyzerCommon'
+import {IfullSet, getTotalPopulationStats, generateMemberTable} from './populationAnalyzerCommon'
 import ajaxRequest from '../ajax/ajax'
 
 
@@ -17,7 +17,9 @@ export default function* initializeProfileStore():any{
 function* loadPopAnalyzerSaga() {
   const initDataset = yield call(ajaxRequest());
   const proccessedMembers: ProcessMemberSet = processMemberData(initDataset);
+  
   const _tableSet = generateMemberTable(initDataset, proccessedMembers.membersSelected)
+  const _totalPopulationStats = getTotalPopulationStats(initDataset)
 
   const finalOutput : LOAD_POP_ANALYZER = {
     fullSet : initDataset,
@@ -28,11 +30,12 @@ function* loadPopAnalyzerSaga() {
     ipDimension : proccessedMembers.ipDimension,
     edCasesDimension : proccessedMembers.edCasesDimension,
     admitsDimension : proccessedMembers.admitsDimension,
-    tableSet : _tableSet
+    tableSet : _tableSet,
+    totalPopulationStats : _totalPopulationStats
+
   } 
   yield put({ type: 'LOAD_POP_ANALYZER', payload: finalOutput})
 }
-
 
 interface ProcessMemberSet {
   crossfilterSet : any;

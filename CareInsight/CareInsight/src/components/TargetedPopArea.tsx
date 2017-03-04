@@ -25,6 +25,7 @@ export default class TargetedPopArea extends React.Component<TargetedPopAreaPage
 
 
     render(){
+       let self = this; 
        return(
            <div>
           <Row>
@@ -46,6 +47,7 @@ export default class TargetedPopArea extends React.Component<TargetedPopAreaPage
                                     </div>
                                     <div className="col-xs-9 text-right">
                                         <h2 className={"font-bold cur_pros_risk_score_targetedPop"}></h2>
+                                        <div className={"font-bold cur_pros_risk_score_targetedPop"}>{this.props.totalPopulationStats.member_count}</div>
                                     </div>
                                 </div>
                                 </div>
@@ -58,6 +60,7 @@ export default class TargetedPopArea extends React.Component<TargetedPopAreaPage
                                     </div>
                                     <div className="col-xs-9 text-right">
                                         <h2 className={"font-bold cur_pros_risk_score_pmpm"}></h2>
+                                        <div className={"font-bold cur_pros_risk_score_pmpm"}>{this.props.totalPopulationStats.pmpm}</div>
                                     </div>
                                 </div>
                                 </div>
@@ -67,17 +70,23 @@ export default class TargetedPopArea extends React.Component<TargetedPopAreaPage
                                 <thead >
                                 <tr>
                                     <th className = "targeted-population-header">Population Risk</th>
-                                    <th className = "targeted-population-header">Min</th>
-                                    <th className = "targeted-population-header">Median</th>
-                                    <th className = "targeted-population-header">Max</th>
+                                    <th className = "targeted-population-header">Min (Targeted)</th>
+                                    <th className = "targeted-population-header">Min (Entire)</th>
+                                    <th className = "targeted-population-header">Median (Targeted)</th>
+                                    <th className = "targeted-population-header">Median (Entire)</th>
+                                    <th className = "targeted-population-header">Max (Targeted)</th>
+                                    <th className = "targeted-population-header">Max (Entire)</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr className="thinRow">
-                                <td className="rowTitle">{"Prospective Risk"}</td>
-                                <td className={"rowVal cur_pros_risk_score_min"}></td>
-                                <td className={"rowVal cur_pros_risk_score_median"}></td>
-                                <td className={"rowVal cur_pros_risk_score_max"}></td>
+                                    <td className="rowTitle">{"Prospective Risk"}</td>
+                                    <td className={"rowVal cur_pros_risk_score_min"}></td>
+                                    <td className={"rowVal "}>{self.props.totalPopulationStats.min}</td>
+                                    <td className={"rowVal cur_pros_risk_score_median"}></td>
+                                    <td className={"rowVal "}>{self.props.totalPopulationStats.median}</td>
+                                    <td className={"rowVal cur_pros_risk_score_max"}></td>
+                                    <td className={"rowVal "}>{self.props.totalPopulationStats.max}</td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -10,7 +10,8 @@ import TargetedPopArea from '../components/TargetedPopArea'
  interface TargetedPopAreaProps {
     fullSet: any,
     prosDimension: any,
-    crossFilterSet: any
+    crossFilterSet: any,
+    totalPopulationStats: any
 }
 
 export interface TargetedPopAreaDispatchProps {
@@ -23,7 +24,8 @@ const mapStateToProps = (state: any): any => {
     return {
         fullSet: (function(s){return s.populationAnalyzerReducer().get('fullSet')})(state),
         prosDimension: (function(s){return s.populationAnalyzerReducer().get('prosDimension')})(state),
-        crossFilterSet: (function(s){return s.populationAnalyzerReducer().get('crossFilterSet')})(state)
+        crossFilterSet: (function(s){return s.populationAnalyzerReducer().get('crossFilterSet')})(state),
+        totalPopulationStats: (function(s){return s.populationAnalyzerReducer().get('totalPopulationStats')})(state)
     }
 }
 

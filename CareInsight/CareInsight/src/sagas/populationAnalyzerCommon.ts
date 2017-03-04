@@ -1,4 +1,5 @@
 import * as alasql from 'alasql';
+import * as d3 from 'd3';
 
 
 export interface IfullSet {
@@ -12,6 +13,23 @@ export interface IfullSet {
   mm_count : number,
   amt_paid: number 
   
+}
+
+export function getTotalPopulationStats(_fullSet:Array<IfullSet>){
+
+     const data = alasql(`SELECT 
+                            SUM(result.amt_paid)/SUM(result.mm_count) AS PMPM
+                            ,MIN(result.cur_pros_risk_score) AS MIN_SCORE
+                            ,AVG(result.cur_pros_risk_score) AS MEDIAN_SCORE
+                            ,MAX(result.cur_pros_risk_score) AS MAX_SCORE
+                            from ? result `,[_fullSet])
+    return { 
+        member_count : d3.format(",.0f")(_fullSet.length),
+        pmpm : d3.format("$,.0f")(data[0]['PMPM']),
+        min : d3.format(",.0f")(data[0]['MIN_SCORE']),
+        median : d3.format(",.0f")(data[0]['MEDIAN_SCORE']),
+        max : d3.format(",.0f")(data[0]['MAX_SCORE'])
+    }
 }
 
 export function generateMemberTable(_fullSet:Array<IfullSet>, _membersSelected:any):any{

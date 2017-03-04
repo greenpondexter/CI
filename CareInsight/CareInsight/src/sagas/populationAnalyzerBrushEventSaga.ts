@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import {LOAD_POP_ANALYZER, BRUSH_UPDATE} from '../actions/actionsInterface'
 import store from '../components/Entry'
 import {getEntireTree} from '../reducers/selectors'
-import {generateMemberTable, IfullSet} from './populationAnalyzerCommon'
+import {generateMemberTable, getTotalPopulationStats, IfullSet} from './populationAnalyzerCommon'
 
 export default function* handleBrushEvent():any{
   yield takeEvery('TRIGGER_BRUSH_UPDATE', processBrushEventSaga)
@@ -24,7 +24,9 @@ function* processBrushEventSaga() {
   const _ipDimension = state.populationAnalyzerReducer().get('ipDimension')
   const _admitsDimension = state.populationAnalyzerReducer().get('admitsDimension')
   const _edCasesDimension = state.populationAnalyzerReducer().get('edCasesDimension')
+
   const _tableSet = generateMemberTable(_fullSet, _membersSelected)
+  const _totalPopulationStats = getTotalPopulationStats(_fullSet)
 
   const finalOutput : BRUSH_UPDATE = {
     fullSet : _fullSet,
@@ -35,7 +37,8 @@ function* processBrushEventSaga() {
     ipDimension : _ipDimension, 
     admitsDimension : _admitsDimension,
     edCasesDimension : _edCasesDimension,
-    tableSet : _tableSet
+    tableSet : _tableSet,
+    totalPopulationStats : _totalPopulationStats
   } 
   yield put({ type: 'BRUSH_UPDATE', payload: finalOutput})
 }
