@@ -45,7 +45,7 @@ export function generateMemberTable(_fullSet:Array<IfullSet>, _membersSelected:a
 
     alasql.fn['convertToMoney'] = convertToMoney; 
 
-    return ( alasql(`SELECT 
+    const a = alasql(`SELECT 
                             fS.member_key
                             ,fS.age
                             ,fS.mm_count
@@ -64,7 +64,7 @@ export function generateMemberTable(_fullSet:Array<IfullSet>, _membersSelected:a
                             join ? keys 
                               on CAST(fS.member_key AS NUMBER) = keys.key 
                             where keys.value = 1`,[fS,keys])
-          )
+    return a; 
 
 
 }

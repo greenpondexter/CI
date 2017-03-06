@@ -25,7 +25,9 @@ const initState = Record({
 
 })
 
-export function populationAnalyzerReducer( state = initState, action: Action<LOAD_POP_ANALYZER>){
+type LOAD_AND_BRUSH_TYPE = LOAD_POP_ANALYZER | BRUSH_UPDATE 
+
+export function populationAnalyzerReducer( state = initState, action: Action<LOAD_AND_BRUSH_TYPE>){
     switch(action.type){
         case 'LOAD_POP_ANALYZER':
             return Record({'fullSet' : action.payload.fullSet,
@@ -43,13 +45,6 @@ export function populationAnalyzerReducer( state = initState, action: Action<LOA
                            'tableSet' : action.payload.tableSet,
                            'totalPopulationStats' : action.payload.totalPopulationStats
                          })
-        default:
-            return state; 
-    }
-}
-
-export function populationAnalyzerOnBrushReducer( state = initState, action: Action<BRUSH_UPDATE>){
-    switch(action.type){
         case 'BRUSH_UPDATE':
             return Record({'fullSet' : action.payload.fullSet,
                            'crossFilterSet' : action.payload.crossFilterSet,
@@ -70,3 +65,4 @@ export function populationAnalyzerOnBrushReducer( state = initState, action: Act
             return state; 
     }
 }
+
