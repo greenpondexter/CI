@@ -17,27 +17,37 @@ import ajaxRequest from '../ajax/ajax'
 import {SUMMARY_DATA, ENR_AND_CLAIMS_DATA} from '../actions/actionsInterface'
 
 
-export default function* initializeMemberProfileSaga():any{
+export function* initializeMemberProfileSaga():any{
   yield takeEvery('TRIGGER_MEMBER_PROFILE_LOAD', loadMemberProfileSaga)
+}
+
+export function* refreshMemberProfileSaga():any{
+    yield takeEvery('TRIGGER_MEMBER_PROFILE_BRUSH_UPDATE', memberProfileBrushUpdateSaga)
+}
+
+function* memberProfileBrushUpdateSaga(data:any){
+    let _state = ((yield select(getMemberProfile)) as any).toJS()
+    const finalOutput = yield populateMemberProfileComponents(_state.claimsData, _state.enrData, data.payload.dates);
+  
+    yield put({ type: 'MEMBER_PROFILE_REFRESH', payload: finalOutput})
 }
 
 function* loadMemberProfileSaga(data:any) {
   const initDataset = yield call(ajaxRequest('MEMBER_PROFILE', data.payload.memberKey));
   registerCustomAlaSqlFunctions();
-  const finalOutput = yield populateMemberProfileComponents(initDataset);
+  const finalOutput = yield populateMemberProfileComponents(initDataset.claims, initDataset.enr);
   
-  yield put({ type: 'MEMBER_PROFILE_LOAD', payload: finalOutput})
+  yield put({ type: 'MEMBER_PROFILE_LOAD', payload:finalOutput})
 }
 
 
-function* populateMemberProfileComponents(dataSet:any){
+function* populateMemberProfileComponents(_claimsData:any, _enrData:any, dates?: any){
     let _state = ((yield select(getMemberProfile)) as any).toJS();
 
-    const _claimsData = dataSet.claims;
-    const _enrData = dataSet.enr; 
-
     //get min and max dates so we know how to constrain queries based on time slider
-    const _dateRange = getMinMaxDate(_state.dateRange, _enrData);
+    const _dateRange = typeof(dates) != 'undefined' ? 
+                             dates : 
+                             getMinMaxDate(_state.dateRange, _enrData);
 
     const _summaryData: SUMMARY_DATA = generateSummaryTable(_dateRange, _claimsData, _enrData)
     const _enrAndClaimsData : ENR_AND_CLAIMS_DATA = generateTimeTable(_dateRange, _claimsData, _enrData)
@@ -51,6 +61,7 @@ function* populateMemberProfileComponents(dataSet:any){
     }
 
 }
+
 
 function generateSummaryTable(dates: any, claimsData: any, enrData: any): SUMMARY_DATA{
 
@@ -108,13 +119,6 @@ function generateTimeTable(dates: any, _claimsData: any, _enrData: any): ENR_AND
       const minMaxDatesAndRisks = alasql (`select MIN(data.from_date) as min_date, MAX(data.from_date) as max_date, MIN(data.as_total) as min_risk, MAX(data.as_total) as max_risk from ? data`, [_enrData]);
       const maxPaid = alasql(`select max(data.amt_paid) as max_paid from ? data`,[_claimsData]);
   
-
-
-      //if the slider hasn't been rendered yet, set a default date range 
-    //   if(this.dateRange.isEmpty()) {
-    //     this.dateRange = this.dateRange.push(queryDates.get(0));
-    //     this.dateRange = this.dateRange.push(queryDates.get(1));
-    //   }
 
       //populate state with what you are sending to component
       return {

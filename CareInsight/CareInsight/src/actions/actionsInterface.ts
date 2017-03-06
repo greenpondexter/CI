@@ -92,6 +92,8 @@ export type MEMBER_PROFILE_LOAD = {
     enrAndClaimsData : ENR_AND_CLAIMS_DATA
 }
 
+export type MEMBER_PROFILE_REFRESH = MEMBER_PROFILE_LOAD
+
 export type ENR_AND_CLAIMS_DATA = {
     minMaxDate: Array<any>,
     minMaxRiskScores: Array<number>,
@@ -101,3 +103,8 @@ export type ENR_AND_CLAIMS_DATA = {
     servicesMonthSummary: any,
     servicesMonthMaxMin: Array<any>
 }
+
+export type TRIGGER_MEMBER_PROFILE_BRUSH_UPDATE = {
+    dates : Array<any>
+}
+
