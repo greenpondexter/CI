@@ -11,9 +11,10 @@ import {IfullSet,
         registerCustomAlaSqlFunctions,
         getTotalPopulationStats, 
         generateMemberTable,
-        stringifyDate} from './populationAnalyzerCommon'
+        stringifyDate,
+        formDate} from './populationAnalyzerCommon'
 import ajaxRequest from '../ajax/ajax'
-import {SUMMARY_DATA} from '../actions/actionsInterface'
+import {SUMMARY_DATA, ENR_AND_CLAIMS_DATA} from '../actions/actionsInterface'
 
 
 export default function* initializeMemberProfileSaga():any{
@@ -39,12 +40,14 @@ function* populateMemberProfileComponents(dataSet:any){
     const _dateRange = getMinMaxDate(_state.dateRange, _enrData);
 
     const _summaryData: SUMMARY_DATA = generateSummaryTable(_dateRange, _claimsData, _enrData)
+    const _enrAndClaimsData : ENR_AND_CLAIMS_DATA = generateTimeTable(_dateRange, _claimsData, _enrData)
 
     return {
         claimsData : _claimsData,
         enrData : _enrData,
         summaryData : _summaryData,
-        dateRange : _dateRange
+        dateRange : _dateRange,
+        enrAndClaimsData : _enrAndClaimsData
     }
 
 }
@@ -92,6 +95,37 @@ function generateSummaryTable(dates: any, claimsData: any, enrData: any): SUMMAR
            member_id: _member_id,
            member_key: _member_key
         };
+}
+
+function generateTimeTable(dates: any, _claimsData: any, _enrData: any): ENR_AND_CLAIMS_DATA{
+       //create date format functions for alasql and d3    
+      alasql.fn.formDateMonth = (x) => {return typeof x !== "undefined" ? new Date(x.substring(0,4), x.substring(4,6) ) : "299912"} 
+      
+      //query for data needed 
+      const servicesMonthSummary = alasql (`select COUNT(DISTINCT data.services_key) as services_count, formDateMonth(data.from_date) as date from ? data where data.from_date > ${stringifyDate(dates[0])} and data.from_date < ${stringifyDate(dates[1])} group by formDateMonth(data.from_date) ORDER BY  formDateMonth(data.from_date) `, [_claimsData])
+      const enrData = alasql (`select distinct formDate(data.from_date) as date, data.as_total as risk from ? data where data.from_date > ${stringifyDate(dates[0])} and data.from_date < ${stringifyDate(dates[1])}`,[_enrData])
+      const claimsData = alasql (`select distinct data.services_key, formDate(data.from_date) as date, data.amt_paid as paid, REPLACE(data.mr_line_desc1,' ','') as setting from ? data where data.amt_paid > -.01 and data.from_date > ${stringifyDate(dates[0])} and data.from_date < ${stringifyDate(dates[1])}`,[_claimsData])
+      const minMaxDatesAndRisks = alasql (`select MIN(data.from_date) as min_date, MAX(data.from_date) as max_date, MIN(data.as_total) as min_risk, MAX(data.as_total) as max_risk from ? data`, [_enrData]);
+      const maxPaid = alasql(`select max(data.amt_paid) as max_paid from ? data`,[_claimsData]);
+  
+
+
+      //if the slider hasn't been rendered yet, set a default date range 
+    //   if(this.dateRange.isEmpty()) {
+    //     this.dateRange = this.dateRange.push(queryDates.get(0));
+    //     this.dateRange = this.dateRange.push(queryDates.get(1));
+    //   }
+
+      //populate state with what you are sending to component
+      return {
+        minMaxDate: [formDate(minMaxDatesAndRisks[0].min_date.toString()), formDate(minMaxDatesAndRisks[0].max_date.toString())],
+        minMaxRiskScores : [minMaxDatesAndRisks[0].min_risk, minMaxDatesAndRisks[0].max_risk], 
+        maxPaid : [maxPaid[0].max_paid],
+        enrData: enrData,
+        claimsData: claimsData,
+        servicesMonthSummary: servicesMonthSummary,
+        servicesMonthMaxMin: [0,2000]
+      }
 }
 
 

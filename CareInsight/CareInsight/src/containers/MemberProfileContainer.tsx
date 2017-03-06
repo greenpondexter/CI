@@ -7,7 +7,8 @@ import MemberProfile from '../components/MemberProfile'
 
 
  interface MemberProfileProps {
-    memberKey: number
+    memberKey: number,
+    enrAndClaimsData : any
 }
 
 export interface MemberProfileDispatchProps {
@@ -20,7 +21,8 @@ export type MemberProfilePageProps = MemberProfileProps & MemberProfileDispatchP
 
 const mapStateToProps = (state: any): any => {
     return {
-         memberKey: (function(s){return s.switchPageReducer().get('memberKey')})(state)
+         memberKey: (function(s){return s.switchPageReducer().get('memberKey')})(state),
+         enrAndClaimsData : (function(s){return s.memberProfileReducer().get('enrAndClaimsData')})(state)
     }
 }
 

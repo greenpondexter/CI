@@ -23,6 +23,10 @@ export function stringifyDate(x:any){
     return x.toISOString().slice(0,10).replace(/-/g,'')  
   }
 
+export function formDate(x:any){
+      return new Date(x.substring(0,4), x.substring(4,6), x.substring(6));
+  }
+
 export function registerCustomAlaSqlFunctions(){
     alasql.fn['formDate'] = (x:any) => {return typeof x !== "undefined" ? new Date(x.substring(0,4), x.substring(4,6), x.substring(6)) : "29991231"}
   }

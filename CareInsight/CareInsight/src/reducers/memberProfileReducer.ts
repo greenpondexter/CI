@@ -7,7 +7,8 @@ const initState = Record({
     claimsData : [],
     enrData : [],
     summaryData : {} ,
-    dateRange : [] 
+    dateRange : [],
+    enrAndClaimsData : {}
 })
 
 export function memberProfileReducer( state = initState, action: Action<MEMBER_PROFILE_LOAD>){
@@ -16,7 +17,8 @@ export function memberProfileReducer( state = initState, action: Action<MEMBER_P
             return Record({'claimsData' : action.payload.claimsData,
                             'enrData' : action.payload.enrData,
                             'summaryData' : action.payload.summaryData,
-                            'dateRange' : action.payload.dateRange
+                            'dateRange' : action.payload.dateRange,
+                            'enrAndClaimsData' : action.payload.enrAndClaimsData
                          })
         default:
             return state; 

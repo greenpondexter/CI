@@ -88,5 +88,16 @@ export type MEMBER_PROFILE_LOAD = {
     claimsData : any,
     enrData : any,
     summaryData: SUMMARY_DATA,
-    dateRange: any
+    dateRange: any,
+    enrAndClaimsData : ENR_AND_CLAIMS_DATA
+}
+
+export type ENR_AND_CLAIMS_DATA = {
+    minMaxDate: Array<any>,
+    minMaxRiskScores: Array<number>,
+    maxPaid: Array<number>,
+    enrData : Array<any>,
+    claimsData: Array<any>,
+    servicesMonthSummary: any,
+    servicesMonthMaxMin: Array<any>
 }

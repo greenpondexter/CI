@@ -18,7 +18,8 @@ export function loadMemberProfile(data:MEMBER_PROFILE_LOAD) : Action<MEMBER_PROF
             claimsData : data.claimsData ,
             enrData : data.enrData,
             summaryData: data.summaryData,
-            dateRange: data.dateRange
+            dateRange: data.dateRange,
+            enrAndClaimsData : data.enrAndClaimsData
         }
     }
 }
