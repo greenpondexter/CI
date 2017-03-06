@@ -25,7 +25,7 @@ export default class TargetedPopTable extends React.Component<TargetedPopTablePa
                   rowCount={this.props.tableSet.length}
                   rowGetter={({index}) => this.props.tableSet[index]}
                 >
-                  <Column
+                 <Column
                     label='ID'
                     dataKey='member_key'
                     width={70}
@@ -36,14 +36,24 @@ export default class TargetedPopTable extends React.Component<TargetedPopTablePa
                     dataKey='mm_count'
                   />
                   <Column
-                  width={90}
+                    width={70}
+                    label='Age'
+                    dataKey='age'
+                  />
+                  <Column
+                    width={150}
+                    label='CCHG'
+                    dataKey='cchg'
+                  />
+                  <Column
+                  width={110}
                   label='Paid'
                   dataKey='amt_paid'
                 />
                 <Column
                   label='Allowed'
                   dataKey='amt_allowed'
-                  width={90}
+                  width={110}
                 />
                 <Column
                   width={110}
@@ -53,11 +63,21 @@ export default class TargetedPopTable extends React.Component<TargetedPopTablePa
                 <Column
                   label='Admits'
                   dataKey='qty_admits'
-                  width={70}
+                  width={90}
+                />
+                <Column
+                  width={140}
+                  label='PCP Visits'
+                  dataKey='qty_pcp_visits'
+                />
+                <Column
+                  label='Spec Visits'
+                  dataKey='qty_spec_visits'
+                  width={140}
                 />
                 <Column
                   width={170}
-                  label='Prev. Prosp Risk'
+                  label='Pre. Prosp Risk'
                   dataKey='cur_pros_risk_score'
                 />
                 <Column
@@ -66,26 +86,15 @@ export default class TargetedPopTable extends React.Component<TargetedPopTablePa
                   width={170}
                 />
                 <Column
-                  width={170}
-                  label='Prev. OP Risk'
-                  dataKey='prev_pro_op'
-                />
-                <Column
                   label='Cur. OP Risk'
                   dataKey='cur_pro_op'
                   width={170}
-                />
-                <Column
-                  width={170}
-                  label='Prev. Prosp ER'
-                  dataKey='prev_pro_ip'
                 />
                 <Column
                   label='Cur. Prosp ER'
                   dataKey='cur_pro_ip'
                   width={170}
                 />
-                  
             </Table>
         </Col>
         <Col md={1}></Col>
