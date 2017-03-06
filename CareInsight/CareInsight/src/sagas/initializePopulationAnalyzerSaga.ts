@@ -15,7 +15,7 @@ export default function* initializeProfileStore():any{
 }
 
 function* loadPopAnalyzerSaga() {
-  const initDataset = yield call(ajaxRequest());
+  const initDataset = yield call(ajaxRequest('POP_ANALYZER'));
   const proccessedMembers: ProcessMemberSet = processMemberData(initDataset);
   
   const _tableSet = generateMemberTable(initDataset, proccessedMembers.membersSelected)

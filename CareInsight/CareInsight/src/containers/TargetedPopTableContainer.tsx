@@ -7,13 +7,16 @@ import {Provider} from 'react-redux'
 import {Panel, Row, Col} from 'react-bootstrap';
 import TargetedPopTable from '../components/TargetedPopTable'
 import {triggerBrushUpdate} from '../actions/populationAnalyzerActions'
+import {switchPage} from '../actions/sessionActions'
 
  interface TargetedPopTableProps {
     tableSet: any,
 }
 
 export interface TargetedPopTableDispatchProps {
-    onPopulationAnalyzerBrushUpdate(): void; 
+    onPopulationAnalyzerBrushUpdate(): void;
+    onPageSwitch(page: string, memberKey: any): void;
+
 }
 
 export type TargetedPopTablePageProps = TargetedPopTableProps & TargetedPopTableDispatchProps;
@@ -28,7 +31,11 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         onPopulationAnalyzerBrushUpdate: () => {
             dispatch(triggerBrushUpdate())
+        },
+        onPageSwitch: (_page:string, _memberKey: any) => {
+            dispatch(switchPage({page: _page, memberKey : _memberKey}))
         }
+
     }
 }
 

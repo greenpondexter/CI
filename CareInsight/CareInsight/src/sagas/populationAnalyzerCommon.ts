@@ -19,6 +19,14 @@ export interface IfullSet {
   
 }
 
+export function stringifyDate(x:any){
+    return x.toISOString().slice(0,10).replace(/-/g,'')  
+  }
+
+export function registerCustomAlaSqlFunctions(){
+    alasql.fn['formDate'] = (x:any) => {return typeof x !== "undefined" ? new Date(x.substring(0,4), x.substring(4,6), x.substring(6)) : "29991231"}
+  }
+
 export function getTotalPopulationStats(_fullSet:Array<IfullSet>){
 
      const data = alasql(`SELECT 

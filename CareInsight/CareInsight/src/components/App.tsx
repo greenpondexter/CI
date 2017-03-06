@@ -1,5 +1,5 @@
 import * as React from 'react';
-import MemberProfile from '../../js/components/MemberProfile';
+import {MemberProfileContainer} from '../containers/MemberProfileContainer';
 import {PopulationAnalyzerContainer} from '../containers/PopulationAnalyzerContainer';
 import {Provider} from 'react-redux';
 import store from './Entry';
@@ -12,28 +12,26 @@ export default class App extends React.Component<AppPageProps, any>{
     
     let PA = PopulationAnalyzerContainer as any; 
     let pageToRender = this.props.page === "POPULATION_ANALYZER" ?
-                            <PA/> 
-                        //</Provider>
-                        : null ;// <AltContainer stores = {[SessionStore, ProfileDataStore]}
+                            <PA/> : <MemberProfileContainer/> ;
+                        // <AltContainer stores = {[SessionStore, ProfileDataStore]}
                         //                 inject = {{page : () => SessionStore.getState().info.get('page'),
                         //                            members : () => ProfileDataStore.getState().memberData,
                         //                            summaryData : () => ProfileDataStore.getState().summaryData,
                         //                            hcgData : () => ProfileDataStore.getState().hcgData 
                         //                         }}
                         //   >
-                        //   <MemberProfile/>
                         //  </AltContainer>; 
+
           return (
             <div>
               {pageToRender}
             </div>
           )
   }
-
+  
    componentDidMount(){
       this.props.onPopulationAnalyzerLoad();
   }
 
 
 }
-

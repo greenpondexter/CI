@@ -4,7 +4,10 @@ export interface Action<T>{
 
 }
 
-export type SWITCH_PAGE = {id: number, page: string} 
+export type SWITCH_PAGE = {
+    page: string,
+    memberKey: number 
+} 
 
 export type LOAD_POP_ANALYZER = {
      fullSet: Array<any>,
@@ -62,4 +65,28 @@ type populationStats = {
     min: number, 
     median: number,
     max: number 
+}
+
+export type TRIGGER_MEMBER_PROFILE_LOAD = {
+    memberKey: number
+}
+
+export type SUMMARY_DATA = {
+    member_name : string,
+    allowed : any,
+    paid : any,
+    admits : number,
+    mm: number,
+    pmpm : any,
+    age : number, 
+    gender : string,
+    member_id : any,
+    member_key : any 
+}
+
+export type MEMBER_PROFILE_LOAD = {
+    claimsData : any,
+    enrData : any,
+    summaryData: SUMMARY_DATA,
+    dateRange: any
 }

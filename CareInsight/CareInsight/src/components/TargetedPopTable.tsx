@@ -24,6 +24,8 @@ export default class TargetedPopTable extends React.Component<TargetedPopTablePa
                   rowHeight={40}
                   rowCount={this.props.tableSet.length}
                   rowGetter={({index}) => this.props.tableSet[index]}
+                  onRowClick={(d)=>{this.props.onPageSwitch( 'MEMBER_PROFILE', (d as any).rowData.member_key)}
+                             }
                 >
                  <Column
                     label='ID'
