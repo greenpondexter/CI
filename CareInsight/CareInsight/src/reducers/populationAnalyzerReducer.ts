@@ -14,6 +14,7 @@ const initState = Record({
     cchgDimension : null,
     ageDimension: null,
     payerTypeDimension: null,
+    allowedDimension: null, 
     totalPopulationStats : {
         member_count: null,
         pmpm: null,
@@ -38,6 +39,7 @@ export function populationAnalyzerReducer( state = initState, action: Action<LOA
                            'cchgDimension' : action.payload.cchgDimension,
                            'payerTypeDimension' : action.payload.payerTypeDimension,
                            'ageDimension' : action.payload.ageDimension,
+                           'allowedDimension' : action.payload.allowedDimension,
                            'tableSet' : action.payload.tableSet,
                            'totalPopulationStats' : action.payload.totalPopulationStats
                          })
@@ -60,6 +62,7 @@ export function populationAnalyzerOnBrushReducer( state = initState, action: Act
                            'cchgDimension' : action.payload.cchgDimension,
                            'payerTypeDimension' : action.payload.payerTypeDimension,
                            'ageDimension' : action.payload.ageDimension,
+                           'allowedDimension' : action.payload.allowedDimension,
                            'tableSet': action.payload.tableSet,
                            'totalPopulationStats' : action.payload.totalPopulationStats
                          })

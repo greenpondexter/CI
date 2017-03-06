@@ -25,6 +25,7 @@ function* processBrushEventSaga() {
   const _admitsDimension = state.populationAnalyzerReducer().get('admitsDimension')
   const _edCasesDimension = state.populationAnalyzerReducer().get('edCasesDimension')
   const _ageDimension = state.populationAnalyzerReducer().get('ageDimension')
+  const _allowedDimension = state.populationAnalyzerReducer().get('allowedDimension')
   const _cchgDimension = state.populationAnalyzerReducer().get('cchgDimension')
   const _payerTypeDimension = state.populationAnalyzerReducer().get('payerTypeDimension')
   
@@ -43,6 +44,7 @@ function* processBrushEventSaga() {
     payerTypeDimension : _payerTypeDimension,
     ageDimension : _ageDimension,
     cchgDimension : _cchgDimension,
+    allowedDimension : _allowedDimension,
     tableSet : _tableSet,
     totalPopulationStats : _totalPopulationStats
   } 

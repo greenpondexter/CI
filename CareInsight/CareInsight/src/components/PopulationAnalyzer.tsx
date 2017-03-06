@@ -12,6 +12,8 @@ import {EdCasesBarChartContainer} from '../containers/EdCasesBarChartContainer'
 import {AdmitsBarChartContainer} from '../containers/AdmitsBarChartContainer'
 import {FilterPaneContainer} from '../containers/FilterPaneContainer'
 import {TargetedPopTableContainer} from '../containers/TargetedPopTableContainer'
+import {ClaimDollarsBarChartContainer} from '../containers/ClaimDollarsBarChartContainer'
+import {AgeBarChartContainer} from '../containers/AgeBarChartContainer'
 import store from './Entry'
 import {Panel, Row, Col} from 'react-bootstrap'
 
@@ -52,18 +54,24 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
                           </Col>
                             <Col md={7}>
                              <Row style={{maxHeight: 250}}>
-                                  <Col md={6} style={{maxHeight: 250}}>
+                                  <Col md={4} style={{maxHeight: 250}}>
+                                      <ClaimDollarsBarChartContainer/>
+                                  </Col>
+                                  <Col md={4} style={{maxHeight: 250}}>
                                       <ErBarChartContainer/>
                                   </Col>
-                                  <Col md={6} style={{maxHeight: 250}}>
+                                  <Col md={4} style={{maxHeight: 250}}>
                                       <IpBarChartContainer/>
                                   </Col>
                               </Row>
                               <Row style={{maxHeight: 250}}>
-                                 <Col md={6} style={{maxHeight: 250}}>
+                                <Col md={4} style={{maxHeight: 250}}>
+                                      <AgeBarChartContainer/>
+                                  </Col>
+                                 <Col md={4} style={{maxHeight: 250}}>
                                       <EdCasesBarChartContainer/>
                                   </Col>
-                                 <Col md={6} style={{maxHeight: 250}}>
+                                 <Col md={4} style={{maxHeight: 250}}>
                                       <AdmitsBarChartContainer/>
                                   </Col>
                              </Row>

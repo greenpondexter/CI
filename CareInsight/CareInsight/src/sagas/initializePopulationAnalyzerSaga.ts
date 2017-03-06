@@ -33,9 +33,9 @@ function* loadPopAnalyzerSaga() {
     cchgDimension : proccessedMembers.cchgDimension,
     ageDimension : proccessedMembers.ageDimension,
     payerTypeDimension: proccessedMembers.payerTypeDimension,
+    allowedDimension : proccessedMembers.allowedDimension,
     tableSet : _tableSet,
     totalPopulationStats : _totalPopulationStats
-
   } 
   yield put({ type: 'LOAD_POP_ANALYZER', payload: finalOutput})
 }
@@ -50,6 +50,7 @@ interface ProcessMemberSet {
   edCasesDimension : any; 
   cchgDimension: any; 
   ageDimension: any;
+  allowedDimension: any; 
   payerTypeDimension : any; 
 }
 
@@ -67,6 +68,7 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
                 qty_ed_admits : d.qty_ed_admits,
                 mm_count : d.mm_count,
                 amt_paid: d.amt_paid,
+                amt_allowed: d.amt_allowed,
                 age: d.age,
                 cchg: d.cchg,
                 payerType: d.payerType
@@ -92,6 +94,8 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
 
       let _payerTypeDimension = _crossfilterSet.dimension(function(d){ return d.payerType})
 
+      let _allowedDimension = _crossfilterSet.dimension(function(d){return d.amt_allowed})
+
       let _membersSelected = _crossfilterSet.dimension(function(d){return d.member_key})
 
 
@@ -105,7 +109,8 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
         edCasesDimension : _edCasesDimension,
         cchgDimension : _cchgDimension,
         ageDimension : _ageDimension,
-        payerTypeDimension : _payerTypeDimension
+        payerTypeDimension : _payerTypeDimension,
+        allowedDimension : _allowedDimension
       }
 
 }

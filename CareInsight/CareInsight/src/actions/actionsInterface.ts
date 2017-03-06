@@ -18,8 +18,9 @@ export type LOAD_POP_ANALYZER = {
      cchgDimension : any,
      ageDimension: any,
      payerTypeDimension: any,
+     allowedDimension : any, 
      tableSet: any,
-     totalPopulationStats: any 
+     totalPopulationStats: any, 
 }
 export type TRIGGER_POP_ANALYZER_LOAD = {
     count: number 
@@ -45,8 +46,9 @@ export type BRUSH_UPDATE = {
      cchgDimension : any,
      ageDimension: any,
      payerTypeDimension: any,
+     allowedDimension: any, 
      tableSet: any,
-     totalPopulationStats: any 
+     totalPopulationStats: any
 }
 
 export type TRIGGER_POP_ANALYZER_FILTER = {

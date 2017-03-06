@@ -21,6 +21,7 @@ export function loadPopAnalyzer(data:LOAD_POP_ANALYZER): Action<LOAD_POP_ANALYZE
             cchgDimension : data.cchgDimension,
             ageDimension: data.ageDimension,
             payerTypeDimension: data.payerTypeDimension,
+            allowedDimension : data.allowedDimension, 
             tableSet : data.tableSet,
             totalPopulationStats : data.totalPopulationStats
         } 
@@ -59,6 +60,7 @@ export function brushUpdate(data:BRUSH_UPDATE): Action<BRUSH_UPDATE>{
             edCasesDimension : data.edCasesDimension,
             cchgDimension : data.cchgDimension,
             ageDimension: data.ageDimension,
+            allowedDimension : data.allowedDimension, 
             payerTypeDimension: data.payerTypeDimension,
             tableSet : data.tableSet,
             totalPopulationStats : data.totalPopulationStats

@@ -12,6 +12,7 @@ export interface IfullSet {
   qty_ed_admits : number,
   mm_count : number,
   amt_paid: number,
+  amt_allowed: number,
   cchg: number,
   age: number,
   payerType: number
