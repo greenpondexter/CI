@@ -30,6 +30,9 @@ function* loadPopAnalyzerSaga() {
     ipDimension : proccessedMembers.ipDimension,
     edCasesDimension : proccessedMembers.edCasesDimension,
     admitsDimension : proccessedMembers.admitsDimension,
+    cchgDimension : proccessedMembers.cchgDimension,
+    ageDimension : proccessedMembers.ageDimension,
+    payerTypeDimension: proccessedMembers.payerTypeDimension,
     tableSet : _tableSet,
     totalPopulationStats : _totalPopulationStats
 
@@ -45,6 +48,9 @@ interface ProcessMemberSet {
   ipDimension : any; 
   admitsDimension : any;
   edCasesDimension : any; 
+  cchgDimension: any; 
+  ageDimension: any;
+  payerTypeDimension : any; 
 }
 
 function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
@@ -60,7 +66,10 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
                 qty_admits : d.qty_admits,
                 qty_ed_admits : d.qty_ed_admits,
                 mm_count : d.mm_count,
-                amt_paid: d.amt_paid
+                amt_paid: d.amt_paid,
+                age: d.age,
+                cchg: d.cchg,
+                payerType: d.payerType
               }
       })
 
@@ -77,6 +86,12 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
       // dimension for admits breakdown bar chart 
       let _edCasesDimension = _crossfilterSet.dimension(function(d){ return d.qty_ed_admits})
 
+      let _cchgDimension = _crossfilterSet.dimension(function(d){ return d.cchg})
+
+      let _ageDimension = _crossfilterSet.dimension(function(d){ return d.age})
+
+      let _payerTypeDimension = _crossfilterSet.dimension(function(d){ return d.payerType})
+
       let _membersSelected = _crossfilterSet.dimension(function(d){return d.member_key})
 
 
@@ -87,7 +102,10 @@ function processMemberData(fullSet: Array<IfullSet>):ProcessMemberSet{
         erDimension : _erDimension,
         ipDimension : _ipDimension,
         admitsDimension : _admitsDimension,
-        edCasesDimension : _edCasesDimension
+        edCasesDimension : _edCasesDimension,
+        cchgDimension : _cchgDimension,
+        ageDimension : _ageDimension,
+        payerTypeDimension : _payerTypeDimension
       }
 
 }

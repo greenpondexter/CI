@@ -11,6 +11,9 @@ const initState = Record({
     prosDimension: null,
     admitsDimension: null,
     edCasesDimension: null,
+    cchgDimension : null,
+    ageDimension: null,
+    payerTypeDimension: null,
     totalPopulationStats : {
         member_count: null,
         pmpm: null,
@@ -32,6 +35,9 @@ export function populationAnalyzerReducer( state = initState, action: Action<LOA
                            'ipDimension' : action.payload.ipDimension,
                            'admitsDimension' : action.payload.admitsDimension,
                            'edCasesDimension' : action.payload.edCasesDimension,
+                           'cchgDimension' : action.payload.cchgDimension,
+                           'payerTypeDimension' : action.payload.payerTypeDimension,
+                           'ageDimension' : action.payload.ageDimension,
                            'tableSet' : action.payload.tableSet,
                            'totalPopulationStats' : action.payload.totalPopulationStats
                          })
@@ -51,6 +57,9 @@ export function populationAnalyzerOnBrushReducer( state = initState, action: Act
                            'ipDimension' : action.payload.ipDimension, 
                            'admitsDimension' : action.payload.admitsDimension,
                            'edCasesDimension' : action.payload.edCasesDimension,
+                           'cchgDimension' : action.payload.cchgDimension,
+                           'payerTypeDimension' : action.payload.payerTypeDimension,
+                           'ageDimension' : action.payload.ageDimension,
                            'tableSet': action.payload.tableSet,
                            'totalPopulationStats' : action.payload.totalPopulationStats
                          })

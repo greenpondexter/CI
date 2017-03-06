@@ -5,8 +5,6 @@ import {Row, Col} from 'react-bootstrap';
 import {TargetedPopTablePageProps} from '../containers/TargetedPopTableContainer'
 import {Column, Table} from 'react-virtualized';
 
-//import 'react-virtualized/styles.css';
-
 export default class TargetedPopTable extends React.Component<TargetedPopTablePageProps,any>{
   constructor(props: TargetedPopTablePageProps){
         super(props);   
@@ -25,7 +23,7 @@ export default class TargetedPopTable extends React.Component<TargetedPopTablePa
                   headerHeight={50}
                   rowHeight={40}
                   rowCount={this.props.tableSet.length}
-                  rowGetter={({ index }) => this.props.tableSet[index]}
+                  rowGetter={({index}) => this.props.tableSet[index]}
                 >
                   <Column
                     label='ID'

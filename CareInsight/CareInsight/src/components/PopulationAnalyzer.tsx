@@ -10,9 +10,10 @@ import {ErBarChartContainer} from '../containers/ErBarChartContainer'
 import {IpBarChartContainer} from '../containers/IpBarChartContainer'
 import {EdCasesBarChartContainer} from '../containers/EdCasesBarChartContainer'
 import {AdmitsBarChartContainer} from '../containers/AdmitsBarChartContainer'
+import {FilterPaneContainer} from '../containers/FilterPaneContainer'
+import {TargetedPopTableContainer} from '../containers/TargetedPopTableContainer'
 import store from './Entry'
 import {Panel, Row, Col} from 'react-bootstrap'
-import {TargetedPopTableContainer} from '../containers/TargetedPopTableContainer'
 
 export default class PopulationAnalyzer extends React.Component<TargetedPopAreaPageProps, any>{
   constructor(props: TargetedPopAreaPageProps){
@@ -72,6 +73,13 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
                   </Panel>
                 </Col>
               <Col md={1}></Col>
+          </Row>
+          <Row>
+            <Col md={2}></Col>
+            <Col md={8}>
+                <FilterPaneContainer/>
+            </Col>
+            <Col md={2}></Col>
           </Row>
             </div>
             <div className='col-lg-12' data-step='5' data-intro='Targeted member list'>

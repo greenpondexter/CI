@@ -15,6 +15,9 @@ export type LOAD_POP_ANALYZER = {
      ipDimension: any
      admitsDimension: any,
      edCasesDimension: any,
+     cchgDimension : any,
+     ageDimension: any,
+     payerTypeDimension: any,
      tableSet: any,
      totalPopulationStats: any 
 }
@@ -25,6 +28,11 @@ export type TRIGGER_POP_ANALYZER_LOAD = {
 export type TRIGGER_BRUSH_UPDATE = {
     count: number 
 }
+
+export type POP_ANALYZER_FILTERS = {
+    filters: any 
+}
+
 export type BRUSH_UPDATE = {
      fullSet: Array<any>,
      crossFilterSet: any, 
@@ -34,8 +42,16 @@ export type BRUSH_UPDATE = {
      ipDimension: any
      admitsDimension: any,
      edCasesDimension: any,
+     cchgDimension : any,
+     ageDimension: any,
+     payerTypeDimension: any,
      tableSet: any,
      totalPopulationStats: any 
+}
+
+export type TRIGGER_POP_ANALYZER_FILTER = {
+    filter: string,
+    val: any 
 }
 
 type populationStats = {
