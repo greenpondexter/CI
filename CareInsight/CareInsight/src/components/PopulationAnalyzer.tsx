@@ -90,10 +90,18 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
           </Row>
             </div>
             <div className='col-lg-12' data-step='5' data-intro='Targeted member list'>
-              <Panel header="Members" bsStyle="careinsight">
-                  <TargetedPopTableContainer/>
-              </Panel>
-            </div>*/}
+              <Row>
+                <Col md={1}>
+                </Col>
+                <Col md={10}>
+                  <Panel header="Members" bsStyle="careinsight">
+                        <TargetedPopTableContainer/>
+                  </Panel>
+                </Col>
+                <Col md={1}>
+                </Col>
+              </Row>
+            </div>
           </div>
     );
   }
