@@ -19,10 +19,6 @@ export default class ProsScatterPlotChart extends React.Component<ProsScatterPlo
               <Col md={12}>
                 <div className="chartControls reset" style={{display: "none"}}>
                   <div className="chartStatus">
-                    Total Prospective Risk Score Filter: <span className='filter'></span>
-                    <span className="reset">
-                      (<a onClick={this.reset} >Clear</a>)
-                    </span>
                   </div>
                 </div>
               </Col>
@@ -52,14 +48,11 @@ export default class ProsScatterPlotChart extends React.Component<ProsScatterPlo
         .clipPadding(10)
         .dimension(dimension)
         .x(d3.scale.linear().domain([0, 6]))
+        .y(d3.scale.linear().domain([0, 6]))
         .group(group)
         .brushOn(true)
         .xAxisLabel('Prior Total Prospective Risk Score')
         .yAxisLabel('Current Total Propspective Risk Score')
-        .filterPrinter(filters => {
-          return 'Prior [' + nf1(filters[0][0][0]) + " -> " + nf1(filters[0][1][0]) + ']'
-          + ' Current [' + nf1(filters[0][0][1]) + " -> " + nf1(filters[0][1][1]) + ']'
-        })
         .on('postRedraw', function(chart){
           var c = chart;
         })
