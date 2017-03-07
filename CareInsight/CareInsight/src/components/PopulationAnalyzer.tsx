@@ -16,6 +16,7 @@ import {ClaimDollarsBarChartContainer} from '../containers/ClaimDollarsBarChartC
 import {AgeBarChartContainer} from '../containers/AgeBarChartContainer'
 import store from './Entry'
 import {Panel, Row, Col} from 'react-bootstrap'
+import {NavBarContainer} from '../containers/NavBarContainer';
 
 export default class PopulationAnalyzer extends React.Component<TargetedPopAreaPageProps, any>{
   constructor(props: TargetedPopAreaPageProps){
@@ -31,7 +32,7 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
     return (
         <div>
           <div className='col-lg-12'>
-            <NavBar />
+            <NavBarContainer />
           </div>
           <Row>
             <TargetedPopAreaContainer/>

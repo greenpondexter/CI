@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import {MemberSummaryTableContainer} from '../containers/MemberSummaryTableContainer'
 import {HcgServicesBubbleChartContainer} from '../containers/HcgServicesBubbleChartContainer'
 import {SliderChartContainer} from '../containers/SliderChartContainer'
-import NavBar from './NavBar';
+import {NavBarContainer} from '../containers/NavBarContainer';
 import {Panel, Row, Col} from 'react-bootstrap';
 import * as dc from 'dc';
 import {MemberProfilePageProps} from '../containers/MemberProfileContainer'
@@ -30,7 +30,7 @@ export default class MemberProfile extends React.Component<MemberProfilePageProp
     return (
         <div>
           <div className='col-lg-12'>
-              <NavBar />
+              <NavBarContainer/>
           </div>
           <MemberSummaryTableContainer/>
           <Row>

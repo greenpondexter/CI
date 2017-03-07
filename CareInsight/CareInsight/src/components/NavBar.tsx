@@ -1,7 +1,8 @@
 import * as React from 'react';
+import {NavBarPageProps} from '../containers/NavBarContainer'
 
-export default class NavBar extends React.Component<any, any>{
-  constructor(props:any){
+export default class NavBar extends React.Component<NavBarPageProps, any>{
+  constructor(props:NavBarPageProps){
     super(props)
   }
 
@@ -24,7 +25,7 @@ export default class NavBar extends React.Component<any, any>{
                 </ul>
                 <ul className="nav navbar-top-links navbar-right">
                   <li className='active'>
-                    <a href='javascript:void(0)' onClick={() => {}}>Back</a>
+                    <a href='javascript:void(0)' onClick={() => {self.props.onPageSwitch( 'POPULATION_ANALYZER', self.props.memberKey)}}>Back</a>
                   </li>
                 </ul>
             </div>
