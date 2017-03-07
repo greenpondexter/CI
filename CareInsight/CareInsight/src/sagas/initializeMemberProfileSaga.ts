@@ -110,7 +110,7 @@ function generateSummaryTable(dates: any, claimsData: any, enrData: any): SUMMAR
 
 function generateTimeTable(dates: any, _claimsData: any, _enrData: any): ENR_AND_CLAIMS_DATA{
        //create date format functions for alasql and d3    
-      alasql.fn.formDateMonth = (x) => {return typeof x !== "undefined" ? new Date(x.substring(0,4), x.substring(4,6) ) : "299912"} 
+      alasql.fn['formDateMonth'] = (x:any) => {return typeof x !== "undefined" ? new Date(x.substring(0,4), x.substring(4,6) ) : "299912"} 
       
       //query for data needed 
       const servicesMonthSummary = alasql (`select COUNT(DISTINCT data.services_key) as services_count, formDateMonth(data.from_date) as date from ? data where data.from_date > ${stringifyDate(dates[0])} and data.from_date < ${stringifyDate(dates[1])} group by formDateMonth(data.from_date) ORDER BY  formDateMonth(data.from_date) `, [_claimsData])

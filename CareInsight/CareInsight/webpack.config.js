@@ -15,11 +15,6 @@ module.exports = {
   module: {
     loaders: [
     {
-      test     : /\.jsx$/,
-      loaders  : ['babel?presets[]=react,presets[]=es2015'],
-      exclude  : [path.join(__dirname, 'node_modules')]
-    },
-    {
       test: /\.ts$/,
       enforce: 'pre',
       loader: 'tslint-loader'
