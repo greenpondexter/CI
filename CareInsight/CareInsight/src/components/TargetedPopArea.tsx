@@ -30,13 +30,13 @@ export default class TargetedPopArea extends React.Component<TargetedPopAreaPage
            <div>
           <Row>
             <Col md={2}></Col>
-                <Col md={8}>
+                <Col md={10}>
                     <div className={"col-lg-12 cur_pros_risk_score_div"}>
                         <div className="ibox float-e-margins">
-                        <div className="ibox-title">
-                            <h5>Targeted Population</h5>
+                        <div className="ibox-title targetPopAreaTitle">
+                            <div>Targeted Population</div>
                         </div>
-                        <div className="ibox-content boxContentNoPadding">
+                        <div className="ibox-content boxContentNoPadding target targetPopAreaDataBox">
                             <div className= 'row noPaddingRow'>
                             <div className="col-lg-6">
                                 <div className="widget style1 navy-bg">
@@ -94,7 +94,6 @@ export default class TargetedPopArea extends React.Component<TargetedPopAreaPage
                     </div>
                     </div>
                 </Col>
-            <Col md={2}></Col>
           </Row>
             </div>
        ) 
@@ -102,8 +101,6 @@ export default class TargetedPopArea extends React.Component<TargetedPopAreaPage
 
     generateData(){
 
-    // if (this.dcLoaded == true)
-    //   return;
 
     //population
     var groupAll = this.props.crossFilterSet.groupAll();
@@ -174,9 +171,6 @@ export default class TargetedPopArea extends React.Component<TargetedPopAreaPage
       return max;
     }})
     .render();
-
-    //unmanaged state
-    //this.dcLoaded = true;
 
   }
 

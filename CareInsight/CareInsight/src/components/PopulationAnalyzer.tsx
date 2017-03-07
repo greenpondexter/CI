@@ -35,7 +35,12 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
             <NavBarContainer />
           </div>
           <Row>
-            <TargetedPopAreaContainer/>
+            <Col md={6}>
+               <TargetedPopAreaContainer/>
+            </Col>
+            <Col md={6}>
+               <FilterPaneContainer/>
+            </Col>
           </Row>
           <div className='col-lg-12 allCharts'>
            <Row>
@@ -82,13 +87,6 @@ export default class PopulationAnalyzer extends React.Component<TargetedPopAreaP
                   </Panel>
                 </Col>
               <Col md={1}></Col>
-          </Row>
-          <Row>
-            <Col md={2}></Col>
-            <Col md={8}>
-                <FilterPaneContainer/>
-            </Col>
-            <Col md={2}></Col>
           </Row>
             </div>
             <div className='col-lg-12' data-step='5' data-intro='Targeted member list'>

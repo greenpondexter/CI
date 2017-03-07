@@ -54,29 +54,32 @@ export function generateMemberTable(_fullSet:Array<IfullSet>, _membersSelected:a
     const keys = _membersSelected.group().all()
 
     const convertToMoney = (d:any) => {return '$' + d.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}
+    const convertToPercent = (d:any) => {return d.toString() + "%"}
 
     alasql.fn['convertToMoney'] = convertToMoney; 
+    alasql.fn['convertToPercent'] = convertToPercent;
 
-    const a = alasql(`SELECT 
+    const result = alasql(`SELECT 
                             fS.member_key
+                            ,fS.attrib_pcp
                             ,fS.age
-                            ,fS.mm_count
-                            ,convertToMoney(fS.amt_paid) amt_paid
-                            ,convertToMoney(fS.amt_allowed) amt_allowed
+                            ,fS.last_visit
                             ,fS.cchg
-                            ,fS.qty_pcp_visits
-                            ,fS.qty_spec_visits
-                            ,fS.qty_ed_admits
-                            ,fS.qty_admits
                             ,fS.cur_pros_risk_score
                             ,fS.prev_pros_risk_score
                             ,fS.cur_pro_op
                             ,fS.cur_pro_ip
+                            ,convertToPercent(fS.ip_prob) as ip_prob
+                            ,convertToPercent(fS.ed_prob) as ed_prob 
+                            ,fS.risk_strata
+                            ,convertToMoney(fS.proj_tot_cost) as proj_tot_cost 
+                            ,convertToMoney(fS.proj_rx_cost) as proj_rx_cost 
                             from ? fS 
                             join ? keys 
                               on CAST(fS.member_key AS NUMBER) = keys.key 
-                            where keys.value = 1`,[fS,keys])
-    return a; 
+                            where keys.value = 1
+                            `,[fS,keys])
+    return result; 
 
 
 }

@@ -52,45 +52,49 @@ export default class FilterPane extends React.Component<FilterPanePageProps, any
       return (
         <div>
          <Row>
-            <Panel header="Filters" bsStyle="careinsight">
-                <Row>
-                  <Col md={2}></Col>
-                  <Col md={3}>
-                    <FormGroup controlId="formControlsSelect">
-                    <ControlLabel>CCHG:</ControlLabel>
-                    <FormControl componentClass="select" placeholder="select"
-                       onChange={(evt)=>{
-                        {self.props.onPopulationAnalyzerFilterUpdate('CCHG', evt)}
-                    }}>
-                        {self.cchgVals}
-                    </FormControl>
-                    </FormGroup>
-                   </Col>
-                   <Col md={3}>
-                    <FormGroup controlId="formControlsSelect">
-                    <ControlLabel>Payer Type:</ControlLabel>
-                    <FormControl componentClass="select" placeholder="select"
-                       onChange={(evt)=>{
-                        {self.props.onPopulationAnalyzerFilterUpdate('Payer', evt)}
-                    }}>
-                        {self.payerVals}
-                    </FormControl>
-                    </FormGroup>
-                   </Col>
-                   <Col md={2}>
-                    <FormGroup controlId="formControlsSelect">
-                    <ControlLabel>Age:</ControlLabel>
-                    <FormControl componentClass="select" placeholder="select"
-                       onChange={(evt)=>{
-                        {self.props.onPopulationAnalyzerFilterUpdate('Age', evt)}
-                    }}>
-                        {self.ageVals}
-                    </FormControl>
-                    </FormGroup>
-                   </Col>
-                   <Col md={2}></Col>
-                </Row>
-            </Panel>
+             <Col md={10}>
+                <Panel header="Filters" bsStyle="careinsight" className={"filterPanel"}>
+                    <Row>
+                    <Col md={2}></Col>
+                    <Col md={3}>
+                        <FormGroup controlId="formControlsSelect">
+                        <ControlLabel>CCHG:</ControlLabel>
+                        <FormControl componentClass="select" placeholder="select"
+                        onChange={(evt)=>{
+                            {self.props.onPopulationAnalyzerFilterUpdate('CCHG', evt)}
+                        }}>
+                            {self.cchgVals}
+                        </FormControl>
+                        </FormGroup>
+                    </Col>
+                    <Col md={3}>
+                        <FormGroup controlId="formControlsSelect">
+                        <ControlLabel>Payer Type:</ControlLabel>
+                        <FormControl componentClass="select" placeholder="select"
+                        onChange={(evt)=>{
+                            {self.props.onPopulationAnalyzerFilterUpdate('Payer', evt)}
+                        }}>
+                            {self.payerVals}
+                        </FormControl>
+                        </FormGroup>
+                    </Col>
+                    <Col md={2}>
+                        <FormGroup controlId="formControlsSelect">
+                        <ControlLabel>Age:</ControlLabel>
+                        <FormControl componentClass="select" placeholder="select"
+                        onChange={(evt)=>{
+                            {self.props.onPopulationAnalyzerFilterUpdate('Age', evt)}
+                        }}>
+                            {self.ageVals}
+                        </FormControl>
+                        </FormGroup>
+                    </Col>
+                    <Col md={2}></Col>
+                    </Row>
+                </Panel>
+             </Col>
+             <Col md={2}>
+             </Col>
           </Row>
         </div>
       );

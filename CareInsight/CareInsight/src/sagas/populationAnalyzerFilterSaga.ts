@@ -35,11 +35,6 @@ function* processFilterSaga(data:any) {
       _filters.payerTypeFilter.selected === "All" ? _dims.get('payerTypeDimension').filter(null)
                                         : _dims.get('payerTypeDimension').filter(_filters.payerTypeFilter.selected)
     }
-    
-  
-//   const _fullSet : Array<IfullSet> = state.populationAnalyzerReducer().get('fullSet')
-//   const _tableSet = generateMemberTable(_fullSet, _membersSelected)
-//   const _totalPopulationStats = getTotalPopulationStats(_fullSet)
 
   const finalOutput : POP_ANALYZER_FILTERS = {
     filters : _filters
