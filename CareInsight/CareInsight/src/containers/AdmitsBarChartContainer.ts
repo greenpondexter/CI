@@ -16,6 +16,7 @@ import {triggerBrushUpdate} from '../actions/populationAnalyzerActions'
     height: number 
 }
 
+
 export interface AdmitsBarChartDispatchProps {
     onPopulationAnalyzerBrushUpdate(): void; 
 }
