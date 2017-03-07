@@ -42,7 +42,7 @@ export default class ClaimDollarsBarChart extends React.Component<ClaimDollarsBa
        //determine what max is for y-axis
        let yMax : number; 
        yMax = this.props.allowedDimension.group(function (d:number) {
-         return Math.round(d / 1000) * 1000;
+         return Math.round(d / 10000) * 10000;
        }).top(1)[0].value;
       
        //redraw 
@@ -57,23 +57,24 @@ export default class ClaimDollarsBarChart extends React.Component<ClaimDollarsBa
 
       var dimension = self.props.allowedDimension;
       var group = dimension.group(function(d: number){
-          return Math.round(d/1000) * 1000;
+          return Math.round(d/10000) * 10000;
         }
       );
       var dimMax = Math.ceil(dimension.top(1)[0]['amt_allowed']);
       var yMax = dimension.group(function (d:number) {
-        return Math.round(d /1000) * 1000;
+        return Math.round(d /10000) * 10000;
       }).top(1)[0].value
-      var nf1 = d3.format(".1f");
+      const nf1 = d3.format(".1f");
+      const nf2 = d3.format("$,")
 
       let chart = dc.barChart('.claimDollarsBarChart', 'claimDollarsBarChart');
       chart.width(self.props.width)
         .height(self.props.height)
         .dimension(dimension)
         .group(group)
-        .xUnits(dc.units.fp.precision(1000))
-        .x(d3.scale.linear().domain([0, 10000]))
-        .margins({top: 0, right: 0, bottom: 35, left: 60})
+        .xUnits(dc.units.fp.precision(50000))
+        .x(d3.scale.linear().domain([0, 500000]))
+        .margins({top: 20, right: 20, bottom: 55, left: 60})
         .xAxisLabel('Claim Dollars (Allowed)')
         .yAxisLabel('Member Count')
         .filterPrinter((filters: any) => {
@@ -83,7 +84,18 @@ export default class ClaimDollarsBarChart extends React.Component<ClaimDollarsBa
           self.props.onPopulationAnalyzerBrushUpdate()
           dc.redrawAll();
         })
+        .on('renderlet', function(chart: any){
+             chart.selectAll("g.x text")
+                .attr('transform', "rotate(-65) translate(-20,0)");
+        })
         .render();
+
+        chart.xAxis().tickFormat(
+           function (v:any) { return nf2(v)}
+         )
+
+        chart.render();
+
 
   }
 

@@ -27,7 +27,7 @@ export default class TargetedPopTable extends React.Component<TargetedPopTablePa
                   onRowClick={(d)=>{this.props.onPageSwitch( 'MEMBER_PROFILE', (d as any).rowData.member_key)}
                              }
                 >
-                 <Column
+                  <Column
                     label='ID'
                     dataKey='member_key'
                     width={70}
@@ -79,12 +79,12 @@ export default class TargetedPopTable extends React.Component<TargetedPopTablePa
                 />
                 <Column
                   width={170}
-                  label='Pre. Prosp Risk'
-                  dataKey='cur_pros_risk_score'
+                  label='Pre. Pro Risk'
+                  dataKey='prev_pros_risk_score'
                 />
                 <Column
-                  label='Cur. Prosp Risk'
-                  dataKey='prev_pros_risk_score'
+                  label='Cur. Pro Risk'
+                  dataKey='cur_pros_risk_score'
                   width={170}
                 />
                 <Column
@@ -93,7 +93,7 @@ export default class TargetedPopTable extends React.Component<TargetedPopTablePa
                   width={170}
                 />
                 <Column
-                  label='Cur. Prosp ER'
+                  label='Cur. ER Risk'
                   dataKey='cur_pro_ip'
                   width={170}
                 />

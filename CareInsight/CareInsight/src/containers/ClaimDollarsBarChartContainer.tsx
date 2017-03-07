@@ -28,7 +28,7 @@ const mapStateToProps = (state: any): any => {
         allowedDimension: (function(s){return s.populationAnalyzerReducer().get('allowedDimension')})(state),
         crossFilterSet: (function(s){return s.populationAnalyzerReducer().get('crossFilterSet')})(state),
         width: (function(){return 250}),
-        height: (function(){return 240})
+        height: (function(){return 230})
     }
 }
 
